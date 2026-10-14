@@ -2,7 +2,7 @@
 
 // 첫 화면: 스크롤 없이 한 화면에 들어가는 신분증. 같은 카드로 개찰구를 통과해 노선도에 탑승한다.
 export default function Platform({ profile: p, projects, stations, onBoard }) {
-  const shown = (projects.some((x) => x.featured) ? projects.filter((x) => x.featured) : projects).slice(0, 2);
+  const shown = (projects.some((x) => x.featured) ? projects.filter((x) => x.featured) : projects).slice(0, 3);
   const open = stations.filter((s) => s.status !== 'construction');
   const about = (p.about || '').split('TODO')[0].trim();
   const org = [p.school, p.dept, p.year].filter(Boolean).join(' ');
@@ -61,9 +61,12 @@ export default function Platform({ profile: p, projects, stations, onBoard }) {
                 <ul className="id-projects">
                   {shown.map((pr) => (
                     <li key={pr.slug}>
+                      {pr.tag && <em className="id-tag">{pr.tag}</em>}
                       <strong>{pr.name}</strong>
                       <span>{pr.stack?.slice(0, 4).join(' · ')}</span>
-                      {pr.links?.[0] && <a href={pr.links[0].url} target="_blank" rel="noopener noreferrer">{pr.links[0].label} ↗</a>}
+                      {pr.links?.map((l) => (
+                        <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer">{l.label} ↗</a>
+                      ))}
                     </li>
                   ))}
                 </ul>

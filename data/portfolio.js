@@ -36,13 +36,29 @@ export const profile = {
 
 export const projects = [
   {
-    slug: 'yongjin-line',
+    slug: 'websecprog',
     order: 1,
     featured: true,
+    tag: '강의 실습',
+    name: '웹서버보안프로그래밍 실습',
+    summary: '수업에서 실습 중인 Next.js 프로젝트. 회원가입·로그인(해시 저장), 공지와 상품 게시를 MongoDB에 저장합니다.',
+    stack: ['Next.js', 'MongoDB', 'NextAuth', 'bcrypt'],
+    // TODO: 배포 주소가 정해지면 아래 줄의 주석을 풀고 주소를 적으세요.
+    links: [
+      { label: '저장소', url: 'https://github.com/BLACKHEADHUB/websecprog' },
+      // { label: '배포', url: 'https://여기에-배포-주소.vercel.app' },
+    ],
+    image: '',
+  },
+  {
+    slug: 'yongjin-line',
+    order: 2,
+    featured: true,
+    tag: '개인 포트폴리오',
     name: '용진선 포트폴리오',
-    summary: '지하철 노선도로 성장 과정을 보여 주는 포트폴리오. Next.js와 MongoDB로 만들고 관리 화면, 방명록, 입력 검증과 보안 헤더를 갖췄습니다.',
+    summary: '지하철 노선도로 성장 과정을 보여 주는 이 사이트. Next.js와 MongoDB로 만들고 입력 검증과 보안 헤더를 갖췄습니다.',
     stack: ['Next.js', 'React', 'MongoDB', 'SVG', 'Vercel'],
-    links: [{ label: 'GitHub', url: 'https://github.com/BLACKHEADHUB/yongjin-line' }],
+    links: [{ label: '저장소', url: 'https://github.com/BLACKHEADHUB/yongjin-line' }],
     image: '',
   },
 ];
