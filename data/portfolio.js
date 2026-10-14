@@ -1,13 +1,12 @@
 /**
- * 초기 데이터(시드). `npm run seed`로 MongoDB에 넣고,
- * DB에 연결할 수 없을 때는 이 데이터로 사이트를 그대로 보여 줍니다.
+ * 사이트 내용은 전부 이 파일에 있습니다. 고치고 저장하면 화면에 바로 반영되고,
+ * 커밋해서 GitHub에 올리면 Vercel이 자동으로 다시 배포합니다.
  *
- * TODO 표시가 있는 내용은 임시 초안입니다. /admin 에서 고치거나 이 파일을 고친 뒤 `npm run seed -- --reset`.
+ * TODO 표시가 있는 곳은 임시 초안입니다.
  * 지도 위 좌표(x, y)는 lib/layout.js의 노선 위에 놓여 있으니, 역을 옮길 때가 아니면 건드리지 마세요.
  */
 
-export const seedProfile = {
-  _id: 'main',
+export const profile = {
   name: '최용진',
   nameEn: '', // TODO: 영문 표기
   school: '중부대학교',
@@ -27,15 +26,15 @@ export const seedProfile = {
   ],
   interests: ['정보보호', '웹 개발', 'AI 활용'], // TODO: 관심 분야
   talents: ['작사', '랩'], // 특기
-  photo: '', // TODO: 증명사진 주소. public/media/me.jpg 를 넣고 /media/me.jpg 처럼 적기
+  photo: '', // TODO: 증명사진. public/media/me.jpg 에 넣고 '/media/me.jpg'
   status: '', // TODO: 예: 인턴 지원 중
   email: '', // TODO: 비워 두면 화면에 표시되지 않습니다
   github: 'https://github.com/BLACKHEADHUB',
-  resumeUrl: '', // TODO: /media/resume.pdf 처럼 public/media에 넣고 경로를 적기
+  resumeUrl: '', // TODO: 이력서. public/media/resume.pdf 에 넣고 '/media/resume.pdf'
   farewell: '끝까지 탑승해 주셔서 감사합니다. 다음 역은 공사가 끝나는 대로 개통됩니다.', // 성장 노선도를 끝까지 본 사람에게 보이는 인사
 };
 
-export const seedProjects = [
+export const projects = [
   {
     slug: 'yongjin-line',
     order: 1,
@@ -49,7 +48,7 @@ export const seedProjects = [
 ];
 
 // line: 'before'(전과 전, 회색) | 'transfer' | 'after'(전과 후, 초록)
-export const seedStations = [
+export const stations = [
   {
     id: 'y01',
     order: 1,

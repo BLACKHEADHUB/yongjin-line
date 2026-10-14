@@ -32,7 +32,7 @@ export default function Ending({ profile: p, firstStation, sound, onClose, onGue
           >
             승차권 발급
           </button>
-          <button type="button" className="btn" onClick={onGuestbook}>방명록 남기기</button>
+          {onGuestbook && <button type="button" className="btn" onClick={onGuestbook}>방명록 남기기</button>}
         </div>
         <p className={`farewell${issued ? ' show' : ''}`}>{p.farewell}</p>
       </div>

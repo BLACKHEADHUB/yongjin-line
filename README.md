@@ -1,64 +1,48 @@
-# 용진선 노선도 (포트폴리오)
+# 최용진 포트폴리오 (용진선)
 
-사진영상에서 정보보호로 환승한 과정을 지하철 노선도로 보여 주는 포트폴리오입니다.
-Next.js(App Router) + MongoDB Atlas로 만들었습니다.
+중부대학교 정보보호학과 최용진의 포트폴리오입니다. 첫 화면은 교통카드 모양의 신분증이고,
+"노선도 탑승"을 누르면 개찰구를 지나 성장 과정을 지하철 노선도로 볼 수 있습니다.
 
-- 첫 화면: 소개, 기술 스택(분야별), 프로젝트, 성장 과정, 연락처를 담은 일반 포트폴리오 페이지
-- 성장 과정 섹션에서 "노선도로 보기"로 들어가면 개찰구를 지나 노선도(자유 탐색 / 자동 재생 / 목록 보기)가 열립니다
-- 탑승객 방명록, 관리자 페이지(`/admin`)
-- DB가 없거나 실패해도 `data/seed.mjs`의 기본 내용으로 사이트가 뜹니다.
+- Next.js (App Router) / React
+- 내용은 `data/portfolio.js` 파일 하나에 있습니다. DB가 없어도 전부 동작합니다.
+- MongoDB Atlas는 선택 사항이며, 연결하면 방명록이 켜집니다.
 
-## 로컬 실행
+## 실행
 
 ```bash
 npm install
-cp .env.example .env.local   # 값을 채웁니다 (아래 참고)
-npm run dev                  # http://localhost:3000
-npm run seed                 # DB에 기본 내용 넣기 (이미 있는 것은 건드리지 않음)
-npm run seed -- --reset      # 기본 내용으로 되돌리기 (방명록은 유지)
+npm run dev      # http://localhost:3000
 ```
 
-`.env.local` (이 파일은 git에 올라가지 않습니다)
+## 내용 고치기
 
-| 이름 | 설명 |
-|---|---|
-| `MONGODB_URI` | Atlas 연결 문자열 |
-| `MONGODB_DB` | 데이터베이스 이름 (예: `yongjin`) |
-| `ADMIN_PASSWORD` | 관리자 비밀번호 (길고 추측하기 어렵게) |
-| `SESSION_SECRET` | 로그인 쿠키 서명용 임의 문자열 32자 이상 (`openssl rand -hex 32`) |
+1. `data/portfolio.js`를 열어 `TODO` 표시된 곳을 고칩니다 (이름, 소개, 기술 스택, 프로젝트, 역 이야기).
+2. 사진, 영상, 이력서 PDF는 `public/media/`에 넣고 `/media/파일이름`으로 적습니다. 유튜브는 주소를 그대로 적으면 됩니다.
+3. 저장하면 로컬 화면에 바로 반영됩니다. 커밋하고 GitHub에 푸시하면 Vercel이 자동으로 다시 배포합니다.
 
-## MongoDB Atlas 준비 (무료 M0)
+## 배포 (Vercel)
 
-1. atlas 가입 후 Free(M0) 클러스터를 만듭니다.
-2. Database Access에서 사용자를 만듭니다. 권한은 이 DB에 `readWrite`만 줍니다 (관리자 권한 금지).
-3. Network Access에 Vercel이 접속할 수 있게 `0.0.0.0/0`을 추가합니다. 대신 DB 비밀번호를 길게 만드세요.
-4. Connect → Drivers에서 연결 문자열을 복사해 `MONGODB_URI`에 넣습니다.
-5. `npm run seed`로 기본 내용을 넣습니다.
+1. vercel.com에서 이 저장소를 Import 하고 Deploy 합니다. 설정은 기본값 그대로 둡니다.
+2. 이후에는 `main`에 푸시할 때마다 자동으로 배포됩니다.
 
-무료 클러스터는 30일간 접속이 없으면 일시 정지됩니다. 발표 전에 한 번 접속해 두세요.
+## 방명록 켜기 (선택, MongoDB Atlas)
 
-## Vercel 배포
+1. Atlas에서 무료(M0) 클러스터를 만들고, 이 DB에 `readWrite` 권한만 있는 사용자를 만듭니다.
+2. Network Access에 `0.0.0.0/0`을 추가합니다 (Vercel 접속용). 대신 DB 비밀번호를 길게 만듭니다.
+3. 연결 문자열을 로컬은 `.env.local`의 `MONGODB_URI`에, 배포는 Vercel의 Environment Variables에 넣고 Redeploy 합니다.
+4. 별도 초기화(시드)는 필요 없습니다. 첫 글이 저장될 때 컬렉션이 자동으로 만들어집니다.
 
-1. 이 저장소를 GitHub에 올립니다 (이미 올라가 있다면 생략).
-2. vercel.com에서 저장소를 Import 합니다. Framework는 Next.js로 자동 인식됩니다.
-3. Settings → Environment Variables에 위 4개를 넣고 Deploy 합니다.
-4. 배포된 주소에서 `/admin`으로 로그인해 내용을 고칩니다.
-
-## 내용 채우기
-
-- 코드에서: `data/seed.mjs`의 `TODO`로 표시된 곳 (이름, 학년, 이메일, 이야기 등)
-- 화면에서: `/admin` (DB 연결 필요). 사진은 `public/` 폴더에 넣고 `/photo.jpg`처럼 적거나 https 주소를 씁니다. 유튜브는 주소만 붙여 넣으면 됩니다.
-- 이력서 PDF: `public/resume.pdf`로 두고 프로필의 이력서 주소에 `/resume.pdf`
+방명록 글 삭제는 Atlas 화면(Browse Collections → `guestbook`)에서 합니다.
 
 ## 구조
 
 ```
-app/            페이지와 API (api/guestbook, api/admin/*)
-components/     화면 (Gate, Platform, Ride, MapView, ListView, Guestbook, Ending, AdminApp)
-lib/            mongodb 연결, 시드, 검증(validate), 인증(auth), API 공통(api)
-lib/layout.js   노선도 좌표 (역 좌표는 선 위에 있어야 합니다)
-data/seed.mjs   기본 내용 (DB가 비었거나 실패했을 때도 이 내용이 보입니다)
-scripts/seed.mjs
+data/portfolio.js   사이트 내용 전부 (프로필, 기술 스택, 프로젝트, 역)
+app/page.js         첫 화면 (정적 페이지)
+app/api/guestbook   방명록 API (MongoDB가 있을 때만 동작)
+components/         Platform(신분증), Gate(개찰구), Ride, MapView(노선도), ListView, Guestbook, Ending
+lib/layout.js       노선도 좌표 (역 좌표는 선 위에 있어야 합니다)
+lib/mongodb.js      MongoDB 연결 (서버리스용 연결 재사용)
 ```
 
 보안 설계는 [SECURITY.md](SECURITY.md)를 보세요.
