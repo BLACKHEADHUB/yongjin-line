@@ -13,13 +13,14 @@ export const seedProfile = {
   school: '중부대학교',
   dept: '정보보호학과', // TODO: 학년을 알려 주세요
   year: '',
-  tagline: '보안을 생각하며 웹을 만듭니다', // 이름 아래에 크게 보이는 한 줄
-  role: '웹 보안 · 웹 개발', // TODO: 직무 방향. 상단 바와 첫 화면에 표시됩니다
+  tagline: '보안을 생각하며 웹을 만들고 배포합니다', // 이름 아래에 크게 보이는 한 줄
+  role: '웹 개발 · 클라우드 보안', // TODO: 직무 방향. 상단 바와 첫 화면에 표시됩니다
   about:
-    '웹 보안과 웹 개발을 공부하고 있습니다. 사진영상을 전공하다 전과한 경험으로 영상 제작과 사용자 경험에도 관심이 있습니다. TODO: 본인의 말로 2~3문장으로 다듬어 주세요.',
+    '웹 개발과 클라우드 보안을 공부하고 있습니다. 사진영상을 전공하다 전과한 경험으로 영상 제작과 사용자 경험에도 관심이 있습니다. TODO: 본인의 말로 2~3문장으로 다듬어 주세요.',
   // 분야별 기술. level은 비우거나 '익숙함', '사용해 봄' 중 하나. TODO: 실제로 쓴 것만 남기고 고쳐 주세요.
   skills: [
     { group: '웹 개발', items: [{ name: 'JavaScript', level: '' }, { name: 'React', level: '' }, { name: 'Next.js', level: '' }, { name: 'MongoDB', level: '' }, { name: 'Git / GitHub', level: '' }] },
+    { group: '클라우드·배포', items: [{ name: 'Vercel 배포', level: '' }, { name: 'MongoDB Atlas', level: '' }, { name: '환경변수·최소 권한 DB 사용자', level: '' }] },
     { group: '정보보호', items: [{ name: '웹 보안 기초(입력 검증, 인증)', level: '' }, { name: 'NoSQL 인젝션·XSS 대응', level: '' }] },
     { group: 'AI 활용', items: [{ name: '생성형 AI를 이용한 개발·학습', level: '' }] },
     { group: '영상·미디어', items: [{ name: '영상 편집', level: '' }, { name: '사진 촬영', level: '' }] },

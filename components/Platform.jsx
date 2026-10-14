@@ -11,14 +11,19 @@ export default function Platform({ profile: p, projects, stations, onBoard }) {
     <main className="idpage">
       <article className="idcard" aria-label={`${p.name} 신분증`}>
         <header className="id-top">
-          <span>용진선 · 학생 포트폴리오</span>
-          <span className="id-no">ID Y-{String(open.length).padStart(2, '0')}</span>
+          <span className="id-chip" aria-hidden="true" />
+          <span className="id-title">용진선 교통카드 <small>학생 포트폴리오</small></span>
+          <span className="id-no">No. Y-{String(open.length).padStart(2, '0')}</span>
         </header>
 
         <div className="id-body">
           <aside className="id-side">
             <div className="id-photo">
-              {p.photo ? <img src={p.photo} alt={`${p.name} 증명사진`} /> : <span aria-hidden="true">{p.name?.slice(0, 1)}</span>}
+              {p.photo ? (
+                <img src={p.photo} alt={`${p.name} 증명사진`} />
+              ) : (
+                <span className="id-photo-empty">(사진)</span>
+              )}
             </div>
             <h1 className="id-name">{p.name}</h1>
             {p.nameEn && <p className="id-name-en">{p.nameEn}</p>}
