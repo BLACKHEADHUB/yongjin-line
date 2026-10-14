@@ -5,7 +5,7 @@ import ListView from './ListView';
 import Guestbook from './Guestbook';
 import Ending from './Ending';
 
-export default function Ride({ data, sound, setSound, autoplay, setAutoplay, onPlatform }) {
+export default function Ride({ data, guestbook, sound, setSound, autoplay, setAutoplay, onPlatform }) {
   const { profile: p, stations } = data;
   const [view, setView] = useState('map');
   const [led, setLed] = useState('용진선 열차에 탑승하셨습니다');
@@ -36,7 +36,7 @@ export default function Ride({ data, sound, setSound, autoplay, setAutoplay, onP
           <button type="button" className="top-btn" onClick={() => { setAutoplay('idle'); setView(view === 'map' ? 'list' : 'map'); }}>
             {view === 'map' ? '목록 보기' : '노선도 보기'}
           </button>
-          <button type="button" className="top-btn" onClick={() => setShowBook(true)}>방명록</button>
+          {guestbook && <button type="button" className="top-btn" onClick={() => setShowBook(true)}>방명록</button>}
           <button type="button" className="top-btn" aria-pressed={sound} onClick={() => setSound(!sound)}>{sound ? '🔊 소리 켬' : '🔇 소리 끔'}</button>
           <button type="button" className="top-btn" onClick={() => { setAutoplay('idle'); setShowEnd(true); }}>종착역</button>
         </nav>
@@ -59,7 +59,7 @@ export default function Ride({ data, sound, setSound, autoplay, setAutoplay, onP
           firstStation={stations[0]?.name || '시점'}
           sound={sound}
           onClose={() => setShowEnd(false)}
-          onGuestbook={() => { setShowEnd(false); setShowBook(true); }}
+          onGuestbook={guestbook ? () => { setShowEnd(false); setShowBook(true); } : null}
         />
       )}
     </div>

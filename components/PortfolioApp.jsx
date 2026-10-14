@@ -5,7 +5,7 @@ import Platform from './Platform';
 import Ride from './Ride';
 
 // 화면 흐름: 포트폴리오(첫 화면) → "성장 노선도 보기" → 개찰구 → 노선도/목록
-export default function PortfolioApp({ data }) {
+export default function PortfolioApp({ data, guestbook }) {
   const [stage, setStage] = useState('platform');
   const [pendingAuto, setPendingAuto] = useState(false);
   const [autoplay, setAutoplay] = useState('idle');
@@ -40,6 +40,7 @@ export default function PortfolioApp({ data }) {
   return (
     <Ride
       data={data}
+      guestbook={guestbook}
       sound={sound}
       setSound={setSound}
       autoplay={autoplay}

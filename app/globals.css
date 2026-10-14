@@ -213,18 +213,6 @@ img, video { max-width: 100%; }
 .issue-btn { background: var(--ink); color: #fff; border: 0; border-radius: 999px; padding: 10px 20px; font-weight: 700; }
 .farewell { opacity: 0; max-height: 0; overflow: hidden; margin: 0; font-weight: 700; transition: .5s; } .farewell.show { opacity: 1; max-height: 200px; margin-top: 14px; }
 
-/* 관리자 */
-.admin { max-width: 760px; margin: 0 auto; padding: 24px 16px 80px; }
-.ad-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-.ad-card { border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin: 12px 0; background: #fff; }
-.ad-card summary { cursor: pointer; font-weight: 700; }
-.ad-login { max-width: 360px; margin: 80px auto; display: grid; gap: 12px; }
-.ad-field { display: grid; gap: 4px; margin-bottom: 10px; font-size: 14px; } .ad-field span { font-weight: 700; } .ad-field small { color: var(--muted); }
-.ad-warn { background: #fffbeb; border: 1px solid #f59e0b; border-radius: 10px; padding: 10px 14px; font-size: 14px; }
-.ad-tabs { display: flex; gap: 6px; margin: 14px 0; flex-wrap: wrap; } .ad-tabs button { border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 6px 16px; } .ad-tabs .on { background: var(--ink); color: #fff; }
-.ad-gb { list-style: none; padding: 0; } .ad-gb li { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px solid var(--line); padding: 8px 0; }
-.ad-check { display: block; margin: 8px 0 12px; }
-
 /* 모바일 */
 @media (max-width: 720px) {
   .topbar { padding: 8px 12px; } .who-role { display: none; }
