@@ -1,9 +1,9 @@
 import './globals.css';
 
 export const metadata = {
-  title: '용진선 노선도 | 포트폴리오',
-  description: '사진영상에서 정보보호로 환승한 학생의 노선도형 포트폴리오',
-  openGraph: { title: '용진선 노선도', description: '사진영상에서 정보보호로 환승한 학생의 노선도형 포트폴리오', type: 'website', locale: 'ko_KR' },
+  title: '최용진 | 포트폴리오',
+  description: '중부대학교 정보보호학과 최용진의 포트폴리오',
+  openGraph: { title: '용진선 노선도', description: '중부대학교 정보보호학과 최용진의 포트폴리오', type: 'website', locale: 'ko_KR' },
 };
 
 export const viewport = { width: 'device-width', initialScale: 1 };

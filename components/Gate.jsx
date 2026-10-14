@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { beep } from './audio';
 
 // 개찰구 인트로. 카드를 찍으면 통과하고, "건너뛰기"로 바로 들어갈 수도 있다.
-export default function Gate({ name, sound, onEnter }) {
+export default function Gate({ name, school, sound, onEnter }) {
   const [phase, setPhase] = useState('idle'); // idle | tapped | open | leaving
 
   async function tap() {
@@ -43,8 +43,8 @@ export default function Gate({ name, sound, onEnter }) {
           </div>
           <button type="button" className={`card ${phase !== 'idle' ? 'tapped' : ''}`} onClick={tap} aria-label="교통카드 찍기">
             <span className="card-chip" />
-            <span className="card-name">용진선 교통카드</span>
-            <span className="card-owner">{name}</span>
+            <span className="card-name">용진선 · 신분증 겸 교통카드</span>
+            <span className="card-owner">{[school, name].filter(Boolean).join(' ')}</span>
           </button>
         </div>
         <div className="gate-flaps">

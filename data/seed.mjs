@@ -8,14 +8,15 @@
 
 export const seedProfile = {
   _id: 'main',
-  name: '용진', // TODO: 사이트에 표시할 이름
+  name: '최용진',
   nameEn: '', // TODO: 영문 표기
+  school: '중부대학교',
   dept: '정보보호학과', // TODO: 학년을 알려 주세요
   year: '',
-  tagline: '웹 보안과 웹 개발을 공부하는 정보보호학과 학생', // 이름 아래에 크게 보이는 한 줄
+  tagline: '보안을 생각하며 웹을 만듭니다', // 이름 아래에 크게 보이는 한 줄
   role: '웹 보안 · 웹 개발', // TODO: 직무 방향. 상단 바와 첫 화면에 표시됩니다
   about:
-    '정보보호학과에서 웹 보안과 웹 개발을 공부하고 있습니다. 사진영상을 전공하다 전과한 경험 덕분에 영상 제작과 사용자 경험에도 관심이 있습니다. TODO: 본인의 말로 3~4문장으로 다듬어 주세요.',
+    '웹 보안과 웹 개발을 공부하고 있습니다. 사진영상을 전공하다 전과한 경험으로 영상 제작과 사용자 경험에도 관심이 있습니다. TODO: 본인의 말로 2~3문장으로 다듬어 주세요.',
   // 분야별 기술. level은 비우거나 '익숙함', '사용해 봄' 중 하나. TODO: 실제로 쓴 것만 남기고 고쳐 주세요.
   skills: [
     { group: '웹 개발', items: [{ name: 'JavaScript', level: '' }, { name: 'React', level: '' }, { name: 'Next.js', level: '' }, { name: 'MongoDB', level: '' }, { name: 'Git / GitHub', level: '' }] },
@@ -24,6 +25,8 @@ export const seedProfile = {
     { group: '영상·미디어', items: [{ name: '영상 편집', level: '' }, { name: '사진 촬영', level: '' }] },
   ],
   interests: ['정보보호', '웹 개발', 'AI 활용'], // TODO: 관심 분야
+  talents: ['작사', '랩'], // 특기
+  photo: '', // TODO: 증명사진 주소. public/media/me.jpg 를 넣고 /media/me.jpg 처럼 적기
   status: '', // TODO: 예: 인턴 지원 중
   email: '', // TODO: 비워 두면 화면에 표시되지 않습니다
   github: 'https://github.com/BLACKHEADHUB',
