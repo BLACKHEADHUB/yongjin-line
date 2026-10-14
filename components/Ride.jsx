@@ -21,8 +21,8 @@ export default function Ride({ data, sound, setSound, autoplay, setAutoplay, onP
     <div className="ride">
       <header className="topbar">
         <div className="who">
-          <button type="button" className="who-name" onClick={onPlatform} title="승강장으로">{p.name}</button>
-          {p.role && <span className="who-role">{p.role}</span>}
+          <button type="button" className="who-name" onClick={onPlatform}>← 포트폴리오</button>
+          <span className="who-role">{p.name} · 성장 노선도</span>
         </div>
         <nav className="top-actions" aria-label="바로가기">
           {p.email && <a className="top-btn" href={`mailto:${p.email}`}>이메일</a>}
@@ -30,7 +30,7 @@ export default function Ride({ data, sound, setSound, autoplay, setAutoplay, onP
           {p.resumeUrl && <a className="top-btn" href={p.resumeUrl} target="_blank" rel="noopener noreferrer">이력서</a>}
           {view === 'map' && (
             <button type="button" className="top-btn primary" onClick={() => setAutoplay(autoplay === 'run' ? 'idle' : 'run')}>
-              {autoplay === 'run' ? '■ 중지' : '▶ 자동 탑승'}
+              {autoplay === 'run' ? '■ 중지' : '▶ 자동 재생'}
             </button>
           )}
           <button type="button" className="top-btn" onClick={() => { setAutoplay('idle'); setView(view === 'map' ? 'list' : 'map'); }}>

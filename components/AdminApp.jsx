@@ -10,6 +10,16 @@ const mediaOut = (t) => lines(t).map((l) => { const [type = '', src = '', ...cap
 const mediaIn = (a = []) => a.map((m) => `${m.type} | ${m.type === 'youtube' ? `https://youtu.be/${m.src}` : m.src} | ${m.caption || ''}`).join('\n');
 const facOut = (t) => Object.fromEntries(pairs(t, ':'));
 const facIn = (o = {}) => Object.entries(o).map(([k, v]) => `${k} : ${v}`).join('\n');
+const skillsOut = (t) => lines(t).map((l) => {
+  const i = l.indexOf(':');
+  const group = (i < 0 ? l : l.slice(0, i)).trim();
+  const items = (i < 0 ? '' : l.slice(i + 1)).split(',').map((x) => x.trim()).filter(Boolean).map((x) => {
+    const m = x.match(/^(.*?)\s*\((익숙함|사용해 봄)\)$/);
+    return m ? { name: m[1], level: m[2] } : { name: x, level: '' };
+  });
+  return { group, items };
+});
+const skillsIn = (a = []) => a.map((g) => `${g.group} : ${g.items.map((it) => (it.level ? `${it.name} (${it.level})` : it.name)).join(', ')}`).join('\n');
 const csv = (t) => t.split(',').map((s) => s.trim()).filter(Boolean);
 
 async function api(path, method = 'GET', body) {
@@ -134,12 +144,12 @@ export default function AdminApp({ authed: initialAuthed, dbReady }) {
 }
 
 function ProfileForm({ initial, notify, reload }) {
-  const [f, setF] = useState({ ...initial, interests: (initial.interests || []).join(', ') });
+  const [f, setF] = useState({ ...initial, interests: (initial.interests || []).join(', '), skills: skillsIn(initial.skills) });
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
   async function save(e) {
     e.preventDefault();
     try {
-      await api('/api/admin/profile', 'PUT', { ...f, interests: csv(f.interests) });
+      await api('/api/admin/profile', 'PUT', { ...f, interests: csv(f.interests), skills: skillsOut(f.skills) });
       notify(true, '프로필을 저장했습니다.');
       reload();
     } catch (err) { notify(false, err.message); }
@@ -148,7 +158,9 @@ function ProfileForm({ initial, notify, reload }) {
   return (
     <form className="ad-card" onSubmit={save}>
       {text('name', '이름')}{text('nameEn', '영문 표기')}{text('dept', '학과')}{text('year', '학년')}
-      {text('tagline', '한 줄 소개')}{text('role', '직무 방향')}
+      {text('tagline', '한 줄 소개', '이름 아래에 크게 보입니다')}{text('role', '관심 직무')}
+      <Field label="자기소개"><textarea rows={5} value={f.about || ''} onChange={set('about')} /></Field>
+      <Field label="기술 스택" hint="한 줄에 한 분야: 분야 : 기술, 기술 (익숙함), 기술 (사용해 봄)"><textarea rows={6} value={f.skills} onChange={set('skills')} /></Field>
       {text('interests', '관심 분야', '쉼표로 구분')}
       {text('status', '현재 상태')}{text('email', '이메일')}{text('github', 'GitHub 주소')}
       {text('resumeUrl', '이력서 PDF 주소', '예: /resume.pdf (public 폴더에 파일을 두면 됩니다)')}

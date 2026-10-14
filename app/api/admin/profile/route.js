@@ -1,7 +1,7 @@
 import { getDb } from '@/lib/mongodb.js';
 import { ensureSeeded } from '@/lib/seed.js';
 import { handle, json, readJson, requireDb } from '@/lib/api.js';
-import { str, strArray, safeUrl, ValidationError } from '@/lib/validate.js';
+import { str, strArray, safeUrl, skills, ValidationError } from '@/lib/validate.js';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,6 +20,8 @@ export const PUT = handle(
       dept: str(b.dept ?? '', { max: 40, label: '학과' }),
       year: str(b.year ?? '', { max: 20, label: '학년' }),
       tagline: str(b.tagline ?? '', { max: 100, label: '한 줄 소개' }),
+      about: str(b.about ?? '', { max: 800, label: '자기소개' }),
+      skills: skills(b.skills ?? []),
       role: str(b.role ?? '', { max: 100, label: '직무 방향' }),
       interests: strArray(b.interests ?? [], { maxItems: 8, max: 20, label: '관심 분야' }),
       status: str(b.status ?? '', { max: 60, label: '현재 상태' }),
