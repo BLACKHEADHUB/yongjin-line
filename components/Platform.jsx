@@ -1,147 +1,94 @@
 'use client';
 
-const NAV = [
-  ['about', '소개'],
-  ['skills', '기술 스택'],
-  ['projects', '프로젝트'],
-  ['journey', '성장 과정'],
-  ['contact', '연락처'],
-];
-
-// 첫 화면. 일반적인 포트폴리오처럼 소개, 기술 스택, 프로젝트, 연락처를 한 페이지에 둔다.
-// 성장 과정(노선도)은 그중 한 섹션이며, 거기서 "노선도 보기"로 들어간다.
+// 첫 화면: 스크롤 없이 한 화면에 들어가는 신분증. 같은 카드로 개찰구를 통과해 노선도에 탑승한다.
 export default function Platform({ profile: p, projects, stations, onBoard }) {
-  const featured = projects.filter((x) => x.featured);
-  const shown = featured.length ? featured : projects;
+  const shown = (projects.some((x) => x.featured) ? projects.filter((x) => x.featured) : projects).slice(0, 2);
   const open = stations.filter((s) => s.status !== 'construction');
-  const todo = (t) => typeof t === 'string' && t.includes('TODO');
-  const aboutText = (p.about || '').split('TODO')[0].trim() || p.about;
+  const about = (p.about || '').split('TODO')[0].trim();
+  const org = [p.school, p.dept, p.year].filter(Boolean).join(' ');
 
   return (
-    <div className="site">
-      <header className="site-nav">
-        <a className="site-brand" href="#top">{p.name}</a>
-        <nav aria-label="섹션">
-          {NAV.map(([id, label]) => (
-            <a key={id} href={`#${id}`}>{label}</a>
-          ))}
-        </nav>
-      </header>
+    <main className="idpage">
+      <article className="idcard" aria-label={`${p.name} 신분증`}>
+        <header className="id-top">
+          <span>용진선 · 학생 포트폴리오</span>
+          <span className="id-no">ID Y-{String(open.length).padStart(2, '0')}</span>
+        </header>
 
-      <main className="site-main" id="top">
-        <section className="hero">
-          <p className="hero-kicker">{[p.dept, p.year].filter(Boolean).join(' ')}</p>
-          <h1 className="hero-name">
-            {p.name}
-            {p.nameEn && <span className="hero-name-en">{p.nameEn}</span>}
-          </h1>
-          {p.tagline && <p className="hero-tagline">{p.tagline}</p>}
-          {p.status && <p className="hero-status"><span className="chip status">{p.status}</span></p>}
-          <div className="hero-actions">
-            <a className="btn primary" href="#projects">프로젝트 보기</a>
-            {p.resumeUrl && <a className="btn" href={p.resumeUrl} target="_blank" rel="noopener noreferrer">이력서 PDF</a>}
-            {p.github && <a className="btn" href={p.github} target="_blank" rel="noopener noreferrer">GitHub</a>}
-          </div>
-        </section>
-
-        <section id="about" className="block">
-          <h2 className="section-title">소개</h2>
-          <div className="about-grid">
-            <p className="about-text">{todo(p.about) ? aboutText : p.about}</p>
-            <dl className="facts">
-              {p.dept && (<><dt>전공</dt><dd>{[p.dept, p.year].filter(Boolean).join(' ')}</dd></>)}
+        <div className="id-body">
+          <aside className="id-side">
+            <div className="id-photo">
+              {p.photo ? <img src={p.photo} alt={`${p.name} 증명사진`} /> : <span aria-hidden="true">{p.name?.slice(0, 1)}</span>}
+            </div>
+            <h1 className="id-name">{p.name}</h1>
+            {p.nameEn && <p className="id-name-en">{p.nameEn}</p>}
+            <dl className="id-facts">
+              <dt>소속</dt><dd>{org}</dd>
               {p.role && (<><dt>관심 직무</dt><dd>{p.role}</dd></>)}
-              {p.interests?.length > 0 && (<><dt>관심 분야</dt><dd>{p.interests.join(', ')}</dd></>)}
+              {p.talents?.length > 0 && (<><dt>특기</dt><dd>{p.talents.join(' · ')}</dd></>)}
+              {p.status && (<><dt>상태</dt><dd>{p.status}</dd></>)}
             </dl>
-          </div>
-        </section>
+          </aside>
 
-        {p.skills?.length > 0 && (
-          <section id="skills" className="block">
-            <h2 className="section-title">기술 스택</h2>
-            <div className="skill-grid">
-              {p.skills.map((g) => (
-                <div key={g.group} className="skill-card">
-                  <h3>{g.group}</h3>
-                  <ul>
-                    {g.items.map((it) => (
-                      <li key={it.name}>
-                        <span>{it.name}</span>
-                        {it.level && <em className={it.level === '익숙함' ? 'lv strong' : 'lv'}>{it.level}</em>}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+          <section className="id-main">
+            {p.tagline && <p className="id-tagline">{p.tagline}</p>}
+            {about && <p className="id-about">{about}</p>}
 
-        {shown.length > 0 && (
-          <section id="projects" className="block">
-            <h2 className="section-title">프로젝트</h2>
-            <div className="project-grid">
-              {shown.map((pr) => (
-                <article key={pr.slug} className="project-card">
-                  {pr.image && <img src={pr.image} alt={`${pr.name} 스크린샷`} loading="lazy" />}
-                  <h3>{pr.name}</h3>
-                  {pr.summary && <p>{pr.summary}</p>}
-                  {pr.stack?.length > 0 && (
-                    <div className="badges">
-                      {pr.stack.map((s) => (
-                        <span key={s} className="badge">{s}</span>
+            {p.skills?.length > 0 && (
+              <div className="id-block">
+                <h2>기술 스택</h2>
+                {p.skills.map((g) => (
+                  <div key={g.group} className="id-skill">
+                    <span className="id-skill-label">{g.group}</span>
+                    <span className="id-skill-items">
+                      {g.items.map((it) => (
+                        <span key={it.name} className={`badge${it.level === '익숙함' ? ' strong' : ''}`} title={it.level || undefined}>{it.name}</span>
                       ))}
-                    </div>
-                  )}
-                  {pr.links?.length > 0 && (
-                    <div className="exits">
-                      {pr.links.map((l) => (
-                        <a key={l.url} className="exit" href={l.url} target="_blank" rel="noopener noreferrer">{l.label} ↗</a>
-                      ))}
-                    </div>
-                  )}
-                </article>
-              ))}
-            </div>
-          </section>
-        )}
-
-        <section id="journey" className="block journey">
-          <h2 className="section-title">성장 과정</h2>
-          <div className="journey-box">
-            <div>
-              <p className="journey-lead">고등학교부터 지금까지의 과정을 지하철 노선도 하나로 정리했습니다.</p>
-              <p className="journey-text">
-                각 역이 한 시기입니다. {open[0]?.name}에서 출발해 {open[open.length - 1]?.name}까지,
-                무엇을 했고 무엇을 배웠는지 역마다 확인할 수 있습니다. 열차를 직접 움직이거나, 자동으로 재생하거나, 목록으로 볼 수 있습니다.
-              </p>
-              <div className="board-actions">
-                <button type="button" className="btn primary big" onClick={() => onBoard(false)}>노선도로 보기</button>
-                <button type="button" className="btn big" onClick={() => onBoard(true)}>자동 재생 (발표용)</button>
+                    </span>
+                  </div>
+                ))}
               </div>
-            </div>
-            <ol className="mini-line" aria-label="역 목록">
+            )}
+
+            {shown.length > 0 && (
+              <div className="id-block">
+                <h2>프로젝트</h2>
+                <ul className="id-projects">
+                  {shown.map((pr) => (
+                    <li key={pr.slug}>
+                      <strong>{pr.name}</strong>
+                      <span>{pr.stack?.slice(0, 4).join(' · ')}</span>
+                      {pr.links?.[0] && <a href={pr.links[0].url} target="_blank" rel="noopener noreferrer">{pr.links[0].label} ↗</a>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </section>
+        </div>
+
+        <footer className="id-bottom">
+          <div className="id-contact">
+            {p.email && <a href={`mailto:${p.email}`}>✉️ {p.email}</a>}
+            {p.github && <a href={p.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>}
+            {p.resumeUrl && <a href={p.resumeUrl} target="_blank" rel="noopener noreferrer">이력서 PDF ↗</a>}
+          </div>
+          <div className="id-line" aria-label="성장 노선도">
+            <ol>
               {open.map((s) => (
-                <li key={s.id} className={s.line}>{s.name}</li>
+                <li key={s.id} className={s.line}><i />{s.name}</li>
               ))}
             </ol>
+            <div className="id-board">
+              <p>이 신분증으로 개찰구를 지나, 성장 과정을 노선도로 볼 수 있어요.</p>
+              <div className="board-actions">
+                <button type="button" className="btn primary" onClick={() => onBoard(false)}>🚇 노선도 탑승</button>
+                <button type="button" className="btn" onClick={() => onBoard(true)}>자동 재생</button>
+              </div>
+            </div>
           </div>
-        </section>
-
-        <section id="contact" className="block">
-          <h2 className="section-title">연락처</h2>
-          <div className="hero-actions">
-            {p.email ? (
-              <a className="btn" href={`mailto:${p.email}`}>✉️ {p.email}</a>
-            ) : (
-              <span className="muted">이메일은 곧 추가됩니다.</span>
-            )}
-            {p.github && <a className="btn" href={p.github} target="_blank" rel="noopener noreferrer">GitHub</a>}
-            {p.resumeUrl && <a className="btn" href={p.resumeUrl} target="_blank" rel="noopener noreferrer">이력서 PDF</a>}
-          </div>
-        </section>
-      </main>
-      <footer className="site-foot">© {new Date().getFullYear()} {p.name}</footer>
-    </div>
+        </footer>
+      </article>
+    </main>
   );
 }

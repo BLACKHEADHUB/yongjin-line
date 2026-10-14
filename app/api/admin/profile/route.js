@@ -17,6 +17,9 @@ export const PUT = handle(
     const data = {
       name: str(b.name, { min: 1, max: 30, label: '이름' }),
       nameEn: str(b.nameEn ?? '', { max: 40, label: '영문 표기' }),
+      school: str(b.school ?? '', { max: 30, label: '학교' }),
+      talents: strArray(b.talents ?? [], { maxItems: 6, max: 12, label: '특기' }),
+      photo: safeUrl(b.photo ?? '', { label: '사진 주소' }),
       dept: str(b.dept ?? '', { max: 40, label: '학과' }),
       year: str(b.year ?? '', { max: 20, label: '학년' }),
       tagline: str(b.tagline ?? '', { max: 100, label: '한 줄 소개' }),

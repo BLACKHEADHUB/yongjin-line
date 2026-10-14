@@ -15,6 +15,7 @@ export default function PortfolioApp({ data }) {
     return (
       <Gate
         name={data.profile.name}
+        school={data.profile.school}
         sound={sound}
         onEnter={() => {
           setAutoplay(pendingAuto ? 'run' : 'idle');

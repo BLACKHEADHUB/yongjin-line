@@ -144,12 +144,12 @@ export default function AdminApp({ authed: initialAuthed, dbReady }) {
 }
 
 function ProfileForm({ initial, notify, reload }) {
-  const [f, setF] = useState({ ...initial, interests: (initial.interests || []).join(', '), skills: skillsIn(initial.skills) });
+  const [f, setF] = useState({ ...initial, interests: (initial.interests || []).join(', '), talents: (initial.talents || []).join(', '), skills: skillsIn(initial.skills) });
   const set = (k) => (e) => setF({ ...f, [k]: e.target.value });
   async function save(e) {
     e.preventDefault();
     try {
-      await api('/api/admin/profile', 'PUT', { ...f, interests: csv(f.interests), skills: skillsOut(f.skills) });
+      await api('/api/admin/profile', 'PUT', { ...f, interests: csv(f.interests), talents: csv(f.talents), skills: skillsOut(f.skills) });
       notify(true, '프로필을 저장했습니다.');
       reload();
     } catch (err) { notify(false, err.message); }
@@ -157,11 +157,11 @@ function ProfileForm({ initial, notify, reload }) {
   const text = (k, label, hint) => <Field label={label} hint={hint}><input value={f[k] || ''} onChange={set(k)} /></Field>;
   return (
     <form className="ad-card" onSubmit={save}>
-      {text('name', '이름')}{text('nameEn', '영문 표기')}{text('dept', '학과')}{text('year', '학년')}
+      {text('name', '이름')}{text('school', '학교')}{text('nameEn', '영문 표기')}{text('dept', '학과')}{text('year', '학년')}
       {text('tagline', '한 줄 소개', '이름 아래에 크게 보입니다')}{text('role', '관심 직무')}
       <Field label="자기소개"><textarea rows={5} value={f.about || ''} onChange={set('about')} /></Field>
       <Field label="기술 스택" hint="한 줄에 한 분야: 분야 : 기술, 기술 (익숙함), 기술 (사용해 봄)"><textarea rows={6} value={f.skills} onChange={set('skills')} /></Field>
-      {text('interests', '관심 분야', '쉼표로 구분')}
+      {text('interests', '관심 분야', '쉼표로 구분')}{text('talents', '특기', '쉼표로 구분')}{text('photo', '증명사진 주소', '예: /media/me.jpg (public/media 폴더에 넣기)')}
       {text('status', '현재 상태')}{text('email', '이메일')}{text('github', 'GitHub 주소')}
       {text('resumeUrl', '이력서 PDF 주소', '예: /resume.pdf (public 폴더에 파일을 두면 됩니다)')}
       {text('farewell', '마지막 한 마디')}
