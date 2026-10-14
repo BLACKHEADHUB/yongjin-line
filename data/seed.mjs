@@ -12,14 +12,23 @@ export const seedProfile = {
   nameEn: '', // TODO: 영문 표기
   dept: '정보보호학과', // TODO: 학년을 알려 주세요
   year: '',
-  tagline: '사진영상을 하다 정보보호로 환승했습니다.',
-  role: '웹 개발과 정보보호를 배우는 학생', // TODO: 직무 방향 한 줄
+  tagline: '웹 보안과 웹 개발을 공부하는 정보보호학과 학생', // 이름 아래에 크게 보이는 한 줄
+  role: '웹 보안 · 웹 개발', // TODO: 직무 방향. 상단 바와 첫 화면에 표시됩니다
+  about:
+    '정보보호학과에서 웹 보안과 웹 개발을 공부하고 있습니다. 사진영상을 전공하다 전과한 경험 덕분에 영상 제작과 사용자 경험에도 관심이 있습니다. TODO: 본인의 말로 3~4문장으로 다듬어 주세요.',
+  // 분야별 기술. level은 비우거나 '익숙함', '사용해 봄' 중 하나. TODO: 실제로 쓴 것만 남기고 고쳐 주세요.
+  skills: [
+    { group: '웹 개발', items: [{ name: 'JavaScript', level: '' }, { name: 'React', level: '' }, { name: 'Next.js', level: '' }, { name: 'MongoDB', level: '' }, { name: 'Git / GitHub', level: '' }] },
+    { group: '정보보호', items: [{ name: '웹 보안 기초(입력 검증, 인증)', level: '' }, { name: 'NoSQL 인젝션·XSS 대응', level: '' }] },
+    { group: 'AI 활용', items: [{ name: '생성형 AI를 이용한 개발·학습', level: '' }] },
+    { group: '영상·미디어', items: [{ name: '영상 편집', level: '' }, { name: '사진 촬영', level: '' }] },
+  ],
   interests: ['정보보호', '웹 개발', 'AI 활용'], // TODO: 관심 분야
   status: '', // TODO: 예: 인턴 지원 중
   email: '', // TODO: 비워 두면 화면에 표시되지 않습니다
   github: 'https://github.com/BLACKHEADHUB',
   resumeUrl: '', // TODO: /media/resume.pdf 처럼 public/media에 넣고 경로를 적기
-  farewell: '끝까지 탑승해 주셔서 감사합니다. 다음 역은 공사가 끝나는 대로 개통됩니다.',
+  farewell: '끝까지 탑승해 주셔서 감사합니다. 다음 역은 공사가 끝나는 대로 개통됩니다.', // 성장 노선도를 끝까지 본 사람에게 보이는 인사
 };
 
 export const seedProjects = [
@@ -28,7 +37,7 @@ export const seedProjects = [
     order: 1,
     featured: true,
     name: '용진선 포트폴리오',
-    summary: '지하철 노선도로 풀어낸 내 이야기. Next.js와 MongoDB로 만들고 관리 화면과 방명록까지 갖춘 사이트입니다.',
+    summary: '지하철 노선도로 성장 과정을 보여 주는 포트폴리오. Next.js와 MongoDB로 만들고 관리 화면, 방명록, 입력 검증과 보안 헤더를 갖췄습니다.',
     stack: ['Next.js', 'React', 'MongoDB', 'SVG', 'Vercel'],
     links: [{ label: 'GitHub', url: 'https://github.com/BLACKHEADHUB/yongjin-line' }],
     image: '',
