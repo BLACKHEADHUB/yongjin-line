@@ -1,8 +1,11 @@
-import { profile, projects, stations } from '@/data/portfolio.js';
+import { loadContent } from '@/lib/content.js';
 import { hasDb } from '@/lib/mongodb.js';
 import PortfolioApp from '@/components/PortfolioApp';
 
-// 내용은 data/portfolio.js에서 바로 읽는다. 빌드할 때 한 번 만들어 두는 정적 페이지라 빠르다.
-export default function Home() {
+// 내용은 MongoDB에서 읽는다 (실패하면 data/portfolio.js). 1분 동안은 결과를 재사용해서 DB를 매번 부르지 않는다.
+export const revalidate = 60;
+
+export default async function Home() {
+  const { profile, projects, stations } = await loadContent();
   return <PortfolioApp data={{ profile, projects, stations }} guestbook={hasDb()} />;
 }
