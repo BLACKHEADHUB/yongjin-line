@@ -5,8 +5,8 @@ const csp = [
   "default-src 'self'",
   // Next.js는 인라인 스크립트를 쓰므로 'unsafe-inline'이 필요하다 (개발 모드는 eval도 필요).
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ''}`,
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com",
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self'",
   "img-src 'self' data: https:",
   "media-src 'self' https:",
   'frame-src https://www.youtube-nocookie.com',

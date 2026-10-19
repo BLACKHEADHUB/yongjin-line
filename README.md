@@ -1,7 +1,7 @@
 # 최용진 포트폴리오 (용진선)
 
 중부대학교 정보보호학과 최용진의 포트폴리오입니다. 첫 화면은 교통카드 모양의 신분증이고,
-"노선도 탑승"을 누르면 개찰구를 지나 성장 과정을 지하철 노선도로 볼 수 있습니다.
+"노선도 탑승"을 누르면 개찰구를 지납니다. (데모 버전: 노선도 화면은 `_archive/`에 보관 중)
 
 - Next.js (App Router) / React
 - 내용의 원본은 `data/portfolio.js` 파일 하나입니다.
@@ -43,7 +43,7 @@ data/portfolio.js   사이트 내용 전부 (프로필, 기술 스택, 프로젝
 app/page.js         첫 화면 (DB에서 읽고 1분간 재사용)
 lib/content.js      DB에서 내용 읽기 + 파일 내용과 자동 동기화 + 실패 시 파일로 대체
 app/api/guestbook   방명록 API (MongoDB가 있을 때만 동작)
-components/         Platform(신분증), Gate(개찰구), Ride, MapView(노선도), ListView, Guestbook, Ending
+components/         Platform(첫 화면), Gate(개찰구), PortfolioApp(화면 전환)
 lib/layout.js       노선도 좌표 (역 좌표는 선 위에 있어야 합니다)
 lib/mongodb.js      MongoDB 연결 (서버리스용 연결 재사용)
 ```
