@@ -25,7 +25,7 @@ export const profile = {
     { group: '영상·미디어', items: [{ name: '영상 편집', level: '' }, { name: '사진 촬영', level: '' }] },
   ],
   interests: ['정보보호', '웹 개발', 'AI 활용'], // TODO: 관심 분야
-  talents: ['작사', '랩'], // 특기
+  talents: ['웹 개발', '클라우드 배포', '영상 편집', '작사·랩'], // 특기
   photo: '', // TODO: 증명사진. public/media/me.jpg 에 넣고 '/media/me.jpg'
   status: '', // TODO: 예: 인턴 지원 중
   email: 'chyjin0202@naver.com', // 비워 두면 화면에 표시되지 않습니다

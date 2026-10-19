@@ -17,7 +17,7 @@ export default function Platform({ profile: p, projects, onBoard }) {
             <h1>{p.name}</h1>
             <div>{[p.school, p.dept].filter(Boolean).join(' ')}</div>
             <div>관심 직무: {p.role}</div>
-            {p.talents?.length > 0 && <div>특기: {p.talents.join(', ')}</div>}
+            {p.talents?.length > 0 && <div>특기: {p.talents.join(' · ')}</div>}
           </div>
         </div>
         <div className="idcard-bottom">
