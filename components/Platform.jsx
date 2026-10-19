@@ -8,7 +8,7 @@ export default function Platform({ profile: p, projects, onBoard }) {
     <main>
       <div className="card">
         <div className="card-top">
-          <span>용진선 교통카드</span>
+          <span><span className="chip" />용진선 교통카드</span>
           <span>학생 포트폴리오</span>
         </div>
         <div className="card-body">
@@ -22,19 +22,20 @@ export default function Platform({ profile: p, projects, onBoard }) {
           </div>
         </div>
 
-        <div className="card-body" style={{ display: 'block' }}>
-          <h2 style={{ marginTop: 0 }}>기술 스택</h2>
-          <ul>
-            {p.skills.map((g) => (
-              <li key={g.group}>{g.group}: {g.items.map((it) => it.name).join(', ')}</li>
-            ))}
-          </ul>
+        <div className="card-body" style={{ display: 'block', paddingTop: 0 }}>
+          <h2>기술 스택</h2>
+          {p.skills.map((g) => (
+            <div key={g.group}>
+              <strong>{g.group}</strong>{' '}
+              {g.items.map((it) => <span key={it.name} className="badge">{it.name}</span>)}
+            </div>
+          ))}
 
           <h2>프로젝트</h2>
           <ul>
             {projects.map((pr) => (
               <li key={pr.slug}>
-                {pr.name} - {pr.summary}{' '}
+                <strong>{pr.name}</strong> - {pr.summary}{' '}
                 {pr.links?.map((l) => (
                   <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer">[{l.label}] </a>
                 ))}
@@ -46,7 +47,7 @@ export default function Platform({ profile: p, projects, onBoard }) {
         <div className="card-bottom">
           {p.email && <a href={`mailto:${p.email}`}>{p.email}</a>}
           {p.github && <a href={p.github} target="_blank" rel="noopener noreferrer">GitHub</a>}
-          <button type="button" onClick={onBoard}>노선도 탑승</button>
+          <button type="button" onClick={onBoard}>🚇 노선도 탑승</button>
           <a href="/stations">역 목록</a>
         </div>
       </div>
