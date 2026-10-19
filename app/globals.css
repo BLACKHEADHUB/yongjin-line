@@ -8,16 +8,28 @@ button { padding: 9px 18px; cursor: pointer; border: none; background: #1a7f4b; 
 button:hover { background: #14663c; }
 button.sub { background: #fff; color: #14663c; border: 1px solid #1a7f4b; }
 
-/* 교통카드 모양 신분증 */
-.card { background: #fff; border-radius: 18px; box-shadow: 0 6px 20px rgba(20, 102, 60, .18); overflow: hidden; }
-.card-top { background: linear-gradient(90deg, #14663c, #2fb36d); color: #fff; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
-.chip { display: inline-block; width: 30px; height: 22px; background: #f5d76e; border-radius: 4px; margin-right: 10px; vertical-align: middle; }
-.card-body { padding: 20px; display: flex; gap: 20px; flex-wrap: wrap; }
-.photo { width: 110px; height: 140px; border: 2px dashed #9bd3b3; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #6b8f7a; font-size: 14px; background: #f4fbf7; }
-.info { flex: 1; min-width: 240px; }
-.info h1 { font-size: 28px; }
+/* 교통카드 모양 신분증: 실제 카드 비율(가로:세로 = 1.6:1) */
+.idcard { aspect-ratio: 1.6 / 1; max-width: 560px; margin: 0 auto; border-radius: 20px; color: #fff; background: linear-gradient(135deg, #0f5a35 0%, #1a7f4b 55%, #35c27a 100%); box-shadow: 0 10px 28px rgba(20, 102, 60, .35); padding: 22px 26px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+.idcard::after { content: ''; position: absolute; right: -60px; bottom: -80px; width: 240px; height: 240px; border-radius: 50%; background: rgba(255, 255, 255, .08); }
+.idcard-top { display: flex; justify-content: space-between; align-items: center; font-weight: bold; letter-spacing: 1px; }
+.chip { display: inline-block; width: 38px; height: 28px; background: linear-gradient(135deg, #f5d76e, #d9b44a); border-radius: 5px; margin-right: 10px; vertical-align: middle; }
+.idcard-mid { display: flex; gap: 18px; align-items: center; }
+.photo { flex: 0 0 auto; width: 96px; height: 120px; border: 2px dashed rgba(255, 255, 255, .6); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; background: rgba(255, 255, 255, .12); }
+.photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; }
+.idcard h1 { font-size: 30px; margin: 0 0 4px; }
+.idcard-info div { font-size: 15px; opacity: .95; }
+.idcard-bottom { font-size: 13px; opacity: .9; display: flex; justify-content: space-between; }
+
+/* 눈에 띄는 탑승 버튼 */
+.board { display: block; width: 100%; max-width: 560px; margin: 20px auto; padding: 18px; font-size: 20px; border-radius: 14px; background: #ff7a1a; box-shadow: 0 6px 16px rgba(255, 122, 26, .45); animation: pulse 1.8s ease-in-out infinite; }
+.board:hover { background: #e8650a; }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+
+/* 카드 아래 상세 정보 */
+.panel { background: #fff; border-radius: 14px; box-shadow: 0 2px 8px rgba(0,0,0,.07); padding: 18px 22px; max-width: 560px; margin: 0 auto 16px; }
+.panel h2:first-child { margin-top: 0; }
 .badge { display: inline-block; background: #e3f5ea; color: #14663c; border-radius: 999px; padding: 2px 10px; margin: 2px 4px 2px 0; font-size: 13px; }
-.card-bottom { border-top: 1px solid #e5e8eb; padding: 14px 20px; background: #f8fbf9; font-size: 14px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.links { text-align: center; font-size: 14px; }
 
 /* 개찰구: 카드가 위로 올라가 단말기에 찍히고, 문이 열린다 */
 .gate { text-align: center; padding-top: 24px; }
@@ -40,3 +52,6 @@ button.sub { background: #fff; color: #14663c; border: 1px solid #1a7f4b; }
 .line li::after { content: ''; position: absolute; top: 2px; left: 50%; margin-left: -10px; width: 14px; height: 14px; background: #fff; border: 3px solid #14663c; border-radius: 50%; }
 .line li.construction::before { background: repeating-linear-gradient(90deg, #f0ad4e 0 8px, #fff 8px 14px); }
 .line li.construction::after { border-color: #f0ad4e; }
+
+/* 좁은 화면(휴대폰)에서는 카드 비율을 풀어 내용이 잘리지 않게 한다 */
+@media (max-width: 480px) { .idcard { aspect-ratio: auto; gap: 18px; } .idcard-mid { flex-direction: column; align-items: flex-start; } }
