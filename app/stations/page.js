@@ -14,10 +14,10 @@ export default async function Stations() {
       <ol style={{ listStyle: 'none', margin: 0, padding: 0 }}>
         {stations.map((s) => (
           <li key={s.id} style={{ borderLeft: '4px solid #94a3b8', padding: '0 0 24px 16px' }}>
-            <strong>{s.no} {s.name}</strong>
+            <a href={`/stations/${s.id}`}><strong>{s.no} {s.name}</strong></a>
             {s.status === 'construction' && <span style={{ color: '#b45309' }}> (공사 중)</span>}
             <div style={{ color: '#64748b', fontSize: 14 }}>{s.subtitle}</div>
-            {s.story.map((t, i) => <p key={i} style={{ margin: '6px 0 0' }}>{t}</p>)}
+            <a href={`/stations/${s.id}`} style={{ fontSize: 14 }}>상세 소개 ›</a>
           </li>
         ))}
       </ol>
