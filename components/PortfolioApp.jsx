@@ -2,53 +2,25 @@
 import { useState } from 'react';
 import Gate from './Gate';
 import Platform from './Platform';
-import Ride from './Ride';
 
-// 화면 흐름: 포트폴리오(첫 화면) → "성장 노선도 보기" → 개찰구 → 노선도/목록
-export default function PortfolioApp({ data, guestbook }) {
+// 데모 버전 화면 흐름: 포트폴리오(첫 화면) → 개찰구(카드 찍기) → 준비 중 안내.
+// 노선도·열차 화면은 _archive/ 폴더에 보관해 두었다.
+export default function PortfolioApp({ data }) {
   const [stage, setStage] = useState('platform');
-  const [pendingAuto, setPendingAuto] = useState(false);
-  const [autoplay, setAutoplay] = useState('idle');
-  const [sound, setSound] = useState(false); // 소리는 기본 꺼짐
 
   if (stage === 'gate') {
+    return <Gate name={data.profile.name} school={data.profile.school} sound={false} onEnter={() => setStage('soon')} />;
+  }
+  if (stage === 'soon') {
     return (
-      <Gate
-        name={data.profile.name}
-        school={data.profile.school}
-        sound={sound}
-        onEnter={() => {
-          setAutoplay(pendingAuto ? 'run' : 'idle');
-          setStage('ride');
-        }}
-      />
+      <main className="idpage">
+        <article className="idcard" style={{ textAlign: 'center', padding: '48px 24px' }}>
+          <h1 style={{ fontSize: 24, margin: '0 0 12px' }}>개찰구를 통과했습니다 🚇</h1>
+          <p style={{ margin: '0 0 24px', color: '#64748b' }}>노선도 구간은 데모 버전에서는 아직 열리지 않았어요. 곧 개통됩니다.</p>
+          <button type="button" className="btn primary" onClick={() => setStage('platform')}>첫 화면으로</button>
+        </article>
+      </main>
     );
   }
-  if (stage === 'platform') {
-    return (
-      <Platform
-        profile={data.profile}
-        projects={data.projects}
-        stations={data.stations}
-        onBoard={(auto) => {
-          setPendingAuto(auto);
-          setStage('gate');
-        }}
-      />
-    );
-  }
-  return (
-    <Ride
-      data={data}
-      guestbook={guestbook}
-      sound={sound}
-      setSound={setSound}
-      autoplay={autoplay}
-      setAutoplay={setAutoplay}
-      onPlatform={() => {
-        setAutoplay('idle');
-        setStage('platform');
-      }}
-    />
-  );
+  return <Platform profile={data.profile} projects={data.projects} stations={data.stations} onBoard={() => setStage('gate')} />;
 }

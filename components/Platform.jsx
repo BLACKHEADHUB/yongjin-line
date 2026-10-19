@@ -90,8 +90,7 @@ export default function Platform({ profile: p, projects, stations, onBoard }) {
             <div className="id-board">
               <p>이 신분증으로 개찰구를 지나, 성장 과정을 노선도로 볼 수 있어요.</p>
               <div className="board-actions">
-                <button type="button" className="btn primary" onClick={() => onBoard(false)}>🚇 노선도 탑승</button>
-                <button type="button" className="btn" onClick={() => onBoard(true)}>자동 재생</button>
+                <button type="button" className="btn primary" onClick={onBoard}>🚇 노선도 탑승</button>
               </div>
             </div>
           </div>
