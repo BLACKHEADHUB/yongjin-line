@@ -28,7 +28,7 @@ export const profile = {
   talents: ['작사', '랩'], // 특기
   photo: '', // TODO: 증명사진. public/media/me.jpg 에 넣고 '/media/me.jpg'
   status: '', // TODO: 예: 인턴 지원 중
-  email: '', // TODO: 비워 두면 화면에 표시되지 않습니다
+  email: 'chyjin0202@naver.com', // 비워 두면 화면에 표시되지 않습니다
   github: 'https://github.com/BLACKHEADHUB',
   resumeUrl: '', // TODO: 이력서. public/media/resume.pdf 에 넣고 '/media/resume.pdf'
   farewell: '끝까지 탑승해 주셔서 감사합니다. 다음 역은 공사가 끝나는 대로 개통됩니다.', // 성장 노선도를 끝까지 본 사람에게 보이는 인사
