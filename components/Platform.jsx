@@ -91,6 +91,7 @@ export default function Platform({ profile: p, projects, stations, onBoard }) {
               <p>이 신분증으로 개찰구를 지나, 성장 과정을 노선도로 볼 수 있어요.</p>
               <div className="board-actions">
                 <button type="button" className="btn primary" onClick={onBoard}>🚇 노선도 탑승</button>
+                <a className="btn" href="/stations">역 목록 보기</a>
               </div>
             </div>
           </div>
