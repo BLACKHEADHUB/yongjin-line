@@ -83,7 +83,7 @@ export default function SubwayMap({ stations, selectedId, onSelect, autoplay, on
           const transfer = s.line === 'transfer';
           const above = s.label !== 'below';
           const ny = above ? s.y - 36 : s.y + 42;
-          const cy = above ? ny - 20 : ny + 20;
+          const cy = above ? ny - 32 : ny + 24;
           const sel = selectedId === s.id;
           return (
             <g

@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { beep, chime } from './audio';
+import { beep, chime, thunk } from './audio';
 
 // 개찰구: 교통카드를 끌어서(또는 눌러서) 단말기에 찍으면 삑! 소리와 함께 문이 열리고 통과한다.
 export default function Gate({ name, school, sound, setSound, onEnter }) {
@@ -29,7 +29,7 @@ export default function Gate({ name, school, sound, setSound, onEnter }) {
     setPhase('tapped');
     if (sound) beep();
     navigator.vibrate?.(60);
-    later(() => { setPhase('open'); if (sound) chime(); }, 900);
+    later(() => { setPhase('open'); if (sound) { thunk(); chime(); } }, 900);
     later(() => setPhase('leaving'), 2200);
     later(onEnter, 2900);
   }
@@ -63,34 +63,43 @@ export default function Gate({ name, school, sound, setSound, onEnter }) {
 
   const opened = phase === 'open' || phase === 'leaving';
   const text = { idle: '카드를 위로 끌어 단말기에 대세요', tapped: '확인 중...', open: '통과하세요!', leaving: '통과하세요!' }[phase];
+  const board = { idle: '교통카드를 태그해 주세요 · Tag your card', tapped: '확인 중 · Checking...', open: '승차 완료 · Have a nice trip', leaving: '승차 완료 · Have a nice trip' }[phase];
 
   return (
     <main className={`gate ${phase} ${drag.near && phase === 'idle' ? 'near' : ''}`}>
       <button type="button" className="gate-skip" onClick={onEnter}>건너뛰기 ▸</button>
       <button type="button" className="gate-sound" onClick={() => setSound(!sound)} aria-pressed={sound}>{sound ? '🔊' : '🔇'}</button>
 
-      <div className="gate-sign">용진선 · 교통카드 전용 개찰구</div>
+      <div className="gate-ceiling">
+        <div className="gate-sign">용진선 · Yongjin Line</div>
+        <div className="gate-board"><span key={phase}>{board}</span></div>
+      </div>
 
       <div className="gate-hall">
-        <div className={`gate-arrow ${opened ? 'go' : ''}`}>{opened ? '↓' : '✕'}</div>
-        <div className="gate-body">
-          <div className="gate-post" />
+        <div className="gate-machine">
+          <div className="gate-post">
+            <i className={`lamp ${opened ? 'go' : ''}`} />
+          </div>
           <div className="gate-lane">
-            <div className="gate-flap left" />
-            <div className="gate-flap right" />
+            <div className={`gate-arrow ${opened ? 'go' : ''}`}>{opened ? '↓' : '✕'}</div>
+            <div className="glass left" />
+            <div className="glass right" />
+            <div className="lane-glow" />
           </div>
           <div className="gate-post">
+            <i className={`lamp ${opened ? 'go' : ''}`} />
             <div ref={readerRef} className={`gate-reader ${phase !== 'idle' ? 'ok' : ''}`}>
               <div className="gate-screen">
                 {phase === 'idle' ? '카드를 대 주세요' : (
                   <>삑!<br /><small>승차 완료 · 잔액: 경력 0원</small></>
                 )}
               </div>
-              <div className="gate-pad" />
+              <div className="gate-pad"><span /></div>
             </div>
           </div>
         </div>
       </div>
+      <div className="gate-floor" />
 
       <p className="gate-text">{text}</p>
 
@@ -114,6 +123,7 @@ export default function Gate({ name, school, sound, setSound, onEnter }) {
         <strong>용진선 교통카드</strong>
         <span className="tc-owner">{[school, name].filter(Boolean).join(' ')}</span>
       </div>
+      <div className="gate-flash" />
     </main>
   );
 }

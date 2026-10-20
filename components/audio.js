@@ -57,3 +57,11 @@ export function stopSpeech() {
     /* 무시 */
   }
 }
+
+// 개찰구 문이 열릴 때 나는 둔탁한 소리
+export function thunk() {
+  if (!ensure()) return;
+  tone(95, 0, 0.2, 'sawtooth', 0.22);
+  tone(60, 0.03, 0.3, 'sine', 0.3);
+  tone(190, 0.1, 0.5, 'sawtooth', 0.04);
+}

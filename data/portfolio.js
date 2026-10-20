@@ -259,7 +259,7 @@ export const stations = [
     line: 'after',
     x: 1330,
     y: 340,
-    label: 'above',
+    label: 'below',
     status: 'construction',
     story: ['아직 개통되지 않은 역입니다. 채용을 통해 개통을 앞당겨 주세요.'],
     tags: [],
