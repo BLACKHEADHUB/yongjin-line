@@ -29,8 +29,8 @@ button.sub:hover { background: var(--soft); }
 .chip { display: inline-block; width: 58px; height: 42px; margin-right: 10px; vertical-align: middle; border-radius: 6px; background: linear-gradient(135deg, #f8e08a, #d3a93c); box-shadow: inset 0 0 0 1px rgba(0,0,0,.2); }
 .nfc { font-size: 32px; letter-spacing: -2px; opacity: .8; transform: rotate(0deg); }
 .idcard-mid { display: flex; gap: 30px; align-items: center; }
-.photo { flex: 0 0 auto; width: 150px; height: 188px; border-radius: 14px; border: 2px dashed rgba(255, 255, 255, .6); background: rgba(255, 255, 255, .13); display: flex; align-items: center; justify-content: center; font-size: 14px; overflow: hidden; }
-.photo img { width: 100%; height: 100%; object-fit: cover; }
+.photo { flex: 0 0 auto; width: 176px; height: 176px; border-radius: 16px; border: 2px dashed rgba(255, 255, 255, .6); background: rgba(255, 255, 255, .13); display: flex; align-items: center; justify-content: center; font-size: 14px; overflow: hidden; }
+.photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 .idcard h1 { font-size: 50px; margin: 0 0 4px; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,.25); }
 .idcard-info div { font-size: 22px; opacity: .95; }
 .idcard-info .role { margin-top: 4px; font-weight: bold; }
@@ -99,12 +99,23 @@ button.sub:hover { background: var(--soft); }
 .gate-floor::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, rgba(255,255,255,.07) 0 2px, transparent 2px 120px), repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 2px, transparent 2px 70px); }
 .gate-floor::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 10px; background: repeating-linear-gradient(90deg, #f5c518 0 40px, #1b222b 40px 80px); opacity: .85; }
 .gate-text { position: relative; z-index: 3; margin: 0; font-size: 22px; font-weight: bold; min-height: 30px; text-shadow: 0 2px 6px #000; }
-.tapcard { position: relative; width: 320px; height: 200px; margin-top: 26px; padding: 20px 22px; text-align: left; border-radius: 20px; color: #fff; cursor: grab; touch-action: none; user-select: none; background: linear-gradient(135deg, #0b4a2b, #1a7f4b 55%, #3fd185); box-shadow: 0 16px 32px rgba(0, 0, 0, .55), inset 0 0 0 1px rgba(255,255,255,.2); display: flex; flex-direction: column; justify-content: space-between; z-index: 5; animation: bob 2.4s ease-in-out infinite; }
-.tapcard strong { font-size: 22px; }
+.tapcard { position: relative; overflow: hidden; width: 380px; aspect-ratio: 1.6 / 1; margin-top: 26px; padding: 18px 22px; text-align: left; border-radius: 22px; color: #fff; cursor: grab; touch-action: none; user-select: none; background: linear-gradient(135deg, #0b4a2b 0%, #1a7f4b 52%, #3fd185 100%); box-shadow: 0 16px 32px rgba(0, 0, 0, .55), inset 0 0 0 1px rgba(255,255,255,.2); display: flex; flex-direction: column; justify-content: space-between; z-index: 5; animation: bob 2.4s ease-in-out infinite; }
+.tapcard::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(115deg, rgba(255,255,255,.05) 0 2px, transparent 2px 14px); }
+.tapcard::after { content: ''; position: absolute; right: -50px; bottom: -70px; width: 190px; height: 190px; border-radius: 50%; background: rgba(255, 255, 255, .09); }
+.tapcard > * { position: relative; z-index: 1; }
 .tapcard.dragging { cursor: grabbing; animation: none; }
 .tapcard.done { animation: none; opacity: 0; transition-delay: .9s; }
-.tc-chip { width: 52px; height: 38px; border-radius: 7px; background: linear-gradient(135deg, #f8e08a, #d3a93c); }
-.tc-owner { font-size: 18px; opacity: .95; }
+.tc-top { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 15px; letter-spacing: 1px; }
+.tapcard .chip { width: 40px; height: 29px; margin-right: 8px; }
+.tapcard .nfc { font-size: 22px; }
+.tc-mid { display: flex; gap: 16px; align-items: center; }
+.tc-photo { flex: 0 0 auto; width: 92px; height: 92px; border-radius: 12px; border: 2px dashed rgba(255,255,255,.6); background: rgba(255,255,255,.13); display: flex; align-items: center; justify-content: center; font-size: 12px; overflow: hidden; }
+.tc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; pointer-events: none; }
+.tc-info { display: flex; flex-direction: column; }
+.tc-info strong { font-size: 28px; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,.25); }
+.tc-info span { font-size: 14px; opacity: .95; }
+.tc-info .tc-role { font-weight: bold; margin-top: 2px; }
+.tc-bottom { font-size: 11.5px; opacity: .9; }
 @keyframes bob { 50% { margin-top: 38px; } }
 .gate-flash { position: fixed; inset: 0; background: #fff; opacity: 0; pointer-events: none; z-index: 9; }
 .gate.tapped .gate-flash { animation: flashbang .5s ease-out; }
@@ -160,7 +171,7 @@ button.sub:hover { background: var(--soft); }
   .idcard { font-size: 16px; padding: 24px 26px; }
   .idcard h1 { font-size: 38px; }
   .idcard-info div { font-size: 18px; }
-  .photo { width: 112px; height: 140px; }
+  .photo { width: 130px; height: 130px; }
   .gate-hall { transform: scale(1.15); margin-bottom: 70px; }
 }
 @media (max-width: 560px) {
@@ -173,7 +184,7 @@ button.sub:hover { background: var(--soft); }
   .gate-hall { transform: scale(.85); margin: 30px 0 40px; }
   .gate-board { min-width: 0; font-size: 15px; }
   .gate-sign { font-size: 18px; padding: 10px 24px; }
-  .tapcard { width: 270px; height: 170px; }
+  .tapcard { width: 310px; }
   .st-head { flex-wrap: wrap; }
 }
 @media (prefers-reduced-motion: reduce) {

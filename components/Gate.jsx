@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { beep, chime, thunk } from './audio';
 
 // 개찰구: 교통카드를 끌어서(또는 눌러서) 단말기에 찍으면 삑! 소리와 함께 문이 열리고 통과한다.
-export default function Gate({ name, school, sound, setSound, onEnter }) {
+export default function Gate({ profile: p, sound, setSound, onEnter }) {
   const [phase, setPhase] = useState('idle'); // idle → tapped → open → leaving
   const [drag, setDrag] = useState({ x: 0, y: 0, on: false, near: false });
   const cardRef = useRef(null);
@@ -119,9 +119,21 @@ export default function Gate({ name, school, sound, setSound, onEnter }) {
         aria-label="교통카드 찍기"
         onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && tap()}
       >
-        <span className="tc-chip" />
-        <strong>용진선 교통카드</strong>
-        <span className="tc-owner">{[school, name].filter(Boolean).join(' ')}</span>
+        <div className="tc-top">
+          <span><span className="chip" />용진선 교통카드</span>
+          <span className="nfc" aria-hidden="true">)))</span>
+        </div>
+        <div className="tc-mid">
+          <div className="tc-photo">{p.photo ? <img src={p.photo} alt="" draggable="false" /> : '(사진)'}</div>
+          <div className="tc-info">
+            <strong>{p.name}</strong>
+            <span>{[p.school, p.dept].filter(Boolean).join(' ')}</span>
+            <span className="tc-role">{p.role}</span>
+          </div>
+        </div>
+        <div className="tc-bottom">
+          <span>{p.tagline}</span>
+        </div>
       </div>
       <div className="gate-flash" />
     </main>

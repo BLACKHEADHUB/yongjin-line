@@ -10,7 +10,7 @@ export default function PortfolioApp({ data }) {
   const [sound, setSound] = useState(true);
 
   if (stage === 'gate') {
-    return <Gate name={data.profile.name} school={data.profile.school} sound={sound} setSound={setSound} onEnter={() => setStage('ride')} />;
+    return <Gate profile={data.profile} sound={sound} setSound={setSound} onEnter={() => setStage('ride')} />;
   }
   if (stage === 'ride') return <Ride data={data} sound={sound} setSound={setSound} onPlatform={() => setStage('platform')} />;
   return <Platform profile={data.profile} projects={data.projects} stations={data.stations} onBoard={() => setStage('gate')} />;
