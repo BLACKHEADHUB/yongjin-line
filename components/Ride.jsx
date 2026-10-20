@@ -21,6 +21,13 @@ export default function Ride({ data, sound, setSound, onPlatform }) {
         </span>
       </header>
 
+      <div className="led-board" aria-live="polite">
+        <span key={station ? station.id : 'none'}>
+          {station ? (station.announce || `이번 역은 ${station.name}입니다.`) : '노선도의 역을 눌러 보세요. 열차가 달려갑니다.'}
+          {station?.en ? ` · ${station.en}` : ''}
+        </span>
+      </div>
+
       <SubwayMap
         stations={stations}
         selectedId={selectedId}
@@ -28,6 +35,14 @@ export default function Ride({ data, sound, setSound, onPlatform }) {
         autoplay={autoplay}
         onAutoplayEnd={() => setAutoplay(false)}
       />
+
+      <div className="legend" aria-hidden="true">
+        <span><i className="lg before" />전과 전</span>
+        <span><i className="lg after" />전과 후</span>
+        <span><i className="lg cons" />공사 구간</span>
+        <span><i className="lg transfer" />환승역</span>
+        <span><i className="lg train" />열차</span>
+      </div>
 
       <nav className="chips" aria-label="역 바로가기">
         {stations.map((s) => (

@@ -74,9 +74,19 @@ export default function SubwayMap({ stations, selectedId, onSelect, autoplay, on
       <svg className="subway" viewBox={VIEWBOX} role="img" aria-label="용진선 노선도">
         <path ref={routeRef} d={toPath(TRAIN_ROUTE)} fill="none" stroke="none" />
 
+        {ROUTES.map((r, i) => r.dashed ? null : (
+          <path key={`c${i}`} d={toPath(r.points)} className="route-casing" />
+        ))}
         {ROUTES.map((r, i) => (
           <path key={i} d={toPath(r.points)} pathLength={r.dashed ? undefined : 1} className={`route ${r.kind}${r.dashed ? ' dashed' : ' solid'}`} />
         ))}
+
+        <g className="line-badge">
+          <circle cx="78" cy="310" r="26" />
+          <text x="78" y="319" textAnchor="middle">Y</text>
+          <text className="line-name" x="116" y="304">용진선</text>
+          <text className="line-en" x="116" y="326">Yongjin Line</text>
+        </g>
 
         {withDist.map((s) => {
           const cons = s.status === 'construction';
@@ -85,6 +95,8 @@ export default function SubwayMap({ stations, selectedId, onSelect, autoplay, on
           const ny = above ? s.y - 36 : s.y + 42;
           const cy = above ? ny - 32 : ny + 24;
           const sel = selectedId === s.id;
+          const tag = `${s.no}${cons ? ' · 공사중' : transfer ? ' · 환승' : ''}`;
+          const pw = 14 + tag.length * 9;
           return (
             <g
               key={s.id}
@@ -100,7 +112,8 @@ export default function SubwayMap({ stations, selectedId, onSelect, autoplay, on
               {transfer && <circle className="ring" cx={s.x} cy={s.y} r="21" />}
               <circle className="dot" cx={s.x} cy={s.y} r={transfer ? 13 : 11} />
               <text className="nm" x={s.x} y={ny} textAnchor="middle">{s.name}</text>
-              <text className="cd" x={s.x} y={cy} textAnchor="middle">{s.no}{cons ? ' · 공사중' : transfer ? ' · 환승' : ''}</text>
+              <rect className="pill" x={s.x - pw / 2} y={cy - 14} width={pw} height="20" rx="10" />
+              <text className="cd" x={s.x} y={cy + 1} textAnchor="middle">{tag}</text>
             </g>
           );
         })}

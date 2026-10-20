@@ -90,8 +90,10 @@ export default function Gate({ profile: p, sound, setSound, onEnter }) {
             <i className={`lamp ${opened ? 'go' : ''}`} />
             <div ref={readerRef} className={`gate-reader ${phase !== 'idle' ? 'ok' : ''}`}>
               <div className="gate-screen">
-                {phase === 'idle' ? '카드를 대 주세요' : (
-                  <>삑!<br /><small>승차 완료 · 잔액: 경력 0원</small></>
+                {phase === 'idle' ? (
+                  <>카드를<br />대 주세요</>
+                ) : (
+                  <>삑!<small>승차 완료</small><small>잔액 경력 0원</small></>
                 )}
               </div>
               <div className="gate-pad"><span /></div>
