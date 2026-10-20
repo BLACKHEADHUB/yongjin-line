@@ -1,30 +1,118 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { beep, chime } from './audio';
 
-// 개찰구: 카드를 누르면 단말기로 올라가 찍히고(삑!), 문이 열린 뒤 다음 화면으로 넘어간다.
-export default function Gate({ name, school, onEnter }) {
-  const [phase, setPhase] = useState('idle'); // idle → tapped → open
+// 개찰구: 교통카드를 끌어서(또는 눌러서) 단말기에 찍으면 삑! 소리와 함께 문이 열리고 통과한다.
+export default function Gate({ name, school, sound, setSound, onEnter }) {
+  const [phase, setPhase] = useState('idle'); // idle → tapped → open → leaving
+  const [drag, setDrag] = useState({ x: 0, y: 0, on: false, near: false });
+  const cardRef = useRef(null);
+  const readerRef = useRef(null);
+  const start = useRef(null);
+  const moved = useRef(false);
+  const timers = useRef([]);
 
+  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  const later = (fn, ms) => timers.current.push(setTimeout(fn, ms));
+
+  const center = (el) => {
+    const r = el.getBoundingClientRect();
+    return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+  };
+
+  // 카드를 단말기 위치로 붙이고 → 삑 → 문 열림 → 통과 화면으로
   function tap() {
     if (phase !== 'idle') return;
+    const c = center(cardRef.current);
+    const r = center(readerRef.current);
+    setDrag((d) => ({ x: d.x + (r.x - c.x), y: d.y + (r.y - c.y) + 30, on: false, near: true }));
     setPhase('tapped');
-    setTimeout(() => setPhase('open'), 1200);
-    setTimeout(onEnter, 2200);
+    if (sound) beep();
+    navigator.vibrate?.(60);
+    later(() => { setPhase('open'); if (sound) chime(); }, 900);
+    later(() => setPhase('leaving'), 2200);
+    later(onEnter, 2900);
   }
 
+  function down(e) {
+    if (phase !== 'idle') return;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    start.current = { px: e.clientX, py: e.clientY, x: drag.x, y: drag.y };
+    moved.current = false;
+    setDrag((d) => ({ ...d, on: true }));
+  }
+
+  function move(e) {
+    if (!start.current) return;
+    const dx = e.clientX - start.current.px;
+    const dy = e.clientY - start.current.py;
+    if (Math.abs(dx) + Math.abs(dy) > 6) moved.current = true;
+    const x = start.current.x + dx;
+    const y = start.current.y + dy;
+    const c = center(cardRef.current);
+    const r = center(readerRef.current);
+    setDrag({ x, y, on: true, near: Math.hypot(c.x - r.x, c.y - r.y) < 120 });
+  }
+
+  function up() {
+    if (!start.current) return;
+    start.current = null;
+    if (!moved.current || drag.near) tap();
+    else setDrag({ x: 0, y: 0, on: false, near: false }); // 멀면 제자리로 튕겨 돌아간다
+  }
+
+  const opened = phase === 'open' || phase === 'leaving';
+  const text = { idle: '카드를 위로 끌어 단말기에 대세요', tapped: '확인 중...', open: '통과하세요!', leaving: '통과하세요!' }[phase];
+
   return (
-    <main className={`gate ${phase === 'open' ? 'open' : ''}`}>
-      <h1>개찰구</h1>
-      <p>{phase === 'idle' ? '아래 교통카드를 눌러 찍어 주세요.' : phase === 'tapped' ? '확인 중...' : '통과하세요!'}</p>
-      <div className="machine">
-        <div className={`reader ${phase === 'idle' ? '' : 'ok'}`}>
-          <div className="reader-screen">{phase === 'idle' ? '카드를 대 주세요' : '삑! 승차 완료'}</div>
+    <main className={`gate ${phase} ${drag.near && phase === 'idle' ? 'near' : ''}`}>
+      <button type="button" className="gate-skip" onClick={onEnter}>건너뛰기 ▸</button>
+      <button type="button" className="gate-sound" onClick={() => setSound(!sound)} aria-pressed={sound}>{sound ? '🔊' : '🔇'}</button>
+
+      <div className="gate-sign">용진선 · 교통카드 전용 개찰구</div>
+
+      <div className="gate-hall">
+        <div className={`gate-arrow ${opened ? 'go' : ''}`}>{opened ? '↓' : '✕'}</div>
+        <div className="gate-body">
+          <div className="gate-post" />
+          <div className="gate-lane">
+            <div className="gate-flap left" />
+            <div className="gate-flap right" />
+          </div>
+          <div className="gate-post">
+            <div ref={readerRef} className={`gate-reader ${phase !== 'idle' ? 'ok' : ''}`}>
+              <div className="gate-screen">
+                {phase === 'idle' ? '카드를 대 주세요' : (
+                  <>삑!<br /><small>승차 완료 · 잔액: 경력 0원</small></>
+                )}
+              </div>
+              <div className="gate-pad" />
+            </div>
+          </div>
         </div>
-        <button type="button" className={`tapcard ${phase === 'idle' ? '' : 'tapped'}`} onClick={tap}>
-          <strong>용진선 교통카드</strong>
-          <span>{[school, name].filter(Boolean).join(' ')}</span>
-        </button>
-        <div className="flaps"><div className="flap" /><div className="flap" /></div>
+      </div>
+
+      <p className="gate-text">{text}</p>
+
+      <div
+        ref={cardRef}
+        className={`tapcard ${phase !== 'idle' ? 'done' : ''} ${drag.on ? 'dragging' : ''}`}
+        style={{
+          transform: `translate(${drag.x}px, ${drag.y}px) ${drag.on ? 'rotate(-4deg) scale(1.06)' : phase !== 'idle' ? 'scale(.75)' : ''}`,
+          transition: drag.on ? 'none' : 'transform .6s cubic-bezier(.34,1.56,.64,1), opacity .5s',
+        }}
+        onPointerDown={down}
+        onPointerMove={move}
+        onPointerUp={up}
+        onPointerCancel={up}
+        role="button"
+        tabIndex={0}
+        aria-label="교통카드 찍기"
+        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && tap()}
+      >
+        <span className="tc-chip" />
+        <strong>용진선 교통카드</strong>
+        <span className="tc-owner">{[school, name].filter(Boolean).join(' ')}</span>
       </div>
     </main>
   );

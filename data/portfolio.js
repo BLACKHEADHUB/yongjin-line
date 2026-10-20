@@ -4,6 +4,14 @@
  *
  * TODO 표시가 있는 곳은 임시 초안입니다.
  * 지도 위 좌표(x, y)는 lib/layout.js의 노선 위에 놓여 있으니, 역을 옮길 때가 아니면 건드리지 마세요.
+ *
+ * 역에 내용을 추가하는 법 (stations 안의 해당 역에 적습니다):
+ *   projects: ['websecprog']            ← 위 projects의 slug를 적으면 프로젝트 카드가 나옵니다
+ *   media: [
+ *     { type: 'image', src: '/media/photo1.jpg', caption: '설명' },   // 사진: public/media/ 폴더에 파일을 넣고 경로를 적습니다
+ *     { type: 'video', src: '/media/clip.mp4', caption: '설명' },     // 영상 파일
+ *     { type: 'youtube', src: 'https://youtu.be/영상아이디', caption: '설명' }, // 유튜브 링크
+ *   ]
  */
 
 export const profile = {
@@ -213,9 +221,10 @@ export const stations = [
     status: 'open',
     story: [
       '지금까지 만들어 본 것들이 있는 역입니다. 이 사이트도 여기에 있습니다.',
-      'Next.js와 MongoDB로 직접 만들었고, 관리 화면과 방명록, 입력 검증과 인증 같은 보안 처리까지 구현했습니다.',
+      'Next.js와 MongoDB로 직접 만들었고, 입력 검증과 보안 헤더 같은 보안 처리까지 적용했습니다.',
     ],
     tags: ['Next.js', 'MongoDB', 'Vercel'],
+    projects: ['websecprog', 'yongjin-line'], // 이 역에 보여줄 프로젝트 (위 projects의 slug)
     facilities: { 현재위치: '당신은 지금 여기', 빌드상태: '진행 중' },
     media: [],
     links: [{ label: 'GitHub', url: 'https://github.com/BLACKHEADHUB/yongjin-line' }],
