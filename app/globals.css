@@ -212,3 +212,43 @@ button.sub:hover { background: var(--soft); }
   .board, .board::after, .tapcard, .pulse, .gate::before, .gate-arrow.go, .gate-pad span { animation: none; }
   .route.solid { animation: none; stroke-dashoffset: 0; }
 }
+
+/* ===== 방명록, 종착역, 환승 연출, 역 패널 보강 ===== */
+.btn-link { display: inline-block; font-weight: bold; font-size: 16px; padding: 12px 24px; border-radius: 999px; border: 1px solid var(--green); background: #fff; color: var(--green); text-decoration: none; }
+.modal { position: fixed; inset: 0; z-index: 50; background: rgba(10, 20, 15, .6); display: flex; align-items: center; justify-content: center; padding: 20px; animation: fadein .2s; }
+@keyframes fadein { from { opacity: 0; } }
+.modal-card, .ticket { position: relative; width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto; background: #fff; border-radius: 22px; padding: 32px; box-shadow: 0 20px 50px rgba(0,0,0,.4); }
+.modal-close { position: absolute; top: 14px; right: 14px; width: 42px; height: 42px; padding: 0; font-size: 24px; line-height: 1; }
+.gb-form { display: grid; gap: 10px; margin: 14px 0; }
+.gb-form input { font: inherit; padding: 12px 14px; border: 1px solid #c8dccf; border-radius: 10px; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.form-error { color: #c0392b; margin: 0; font-size: 15px; }
+.gb-list { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 10px; }
+.gb-list li { background: #f4fbf7; border-radius: 12px; padding: 12px 16px; display: grid; gap: 2px; }
+.gb-list span { overflow-wrap: anywhere; }
+.gb-list time { color: var(--muted); font-size: 13px; }
+.gb-empty { color: var(--muted); text-align: center; }
+.ticket { background: linear-gradient(#fff, #f2faf5); border: 2px dashed #9bd3b3; text-align: center; }
+.ticket-kicker { color: var(--green); font-weight: bold; letter-spacing: 2px; margin: 0 0 12px; }
+.ticket-route { display: flex; align-items: center; justify-content: space-around; margin: 8px 0 16px; }
+.ticket-route small { display: block; color: var(--muted); }
+.ticket-route strong { font-size: 28px; }
+.ticket-arrow { font-size: 30px; color: var(--green); }
+.ticket-contacts { list-style: none; margin: 14px 0; padding: 0; display: grid; gap: 6px; }
+.ticket-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+.farewell { margin-top: 18px; color: var(--dark); font-weight: bold; opacity: 0; transform: translateY(8px); transition: opacity .6s, transform .6s; }
+.farewell.show { opacity: 1; transform: none; }
+.transfer-banner { background: #fff7e8; border: 2px solid #f0ad4e; border-radius: 14px; padding: 12px 18px; margin-bottom: 14px; font-size: 18px; animation: fadein .3s; }
+.transfer-banner strong { color: #b45309; margin-right: 8px; }
+.transfer-banner .bar { height: 8px; background: #fde8c4; border-radius: 4px; margin-top: 8px; overflow: hidden; }
+.transfer-banner .bar i { display: block; height: 100%; background: #f0ad4e; transition: width .8s ease; }
+.st-nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+button:disabled { opacity: .4; cursor: default; }
+.highlight { background: #fff8e1; border-left: 5px solid #f0ad4e; border-radius: 6px; padding: 10px 14px; font-weight: bold; }
+.badge-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0; }
+.cert { display: inline-flex; align-items: center; gap: 8px; background: #f1f3f5; border: 1px solid #d5dbe0; border-radius: 10px; padding: 6px 14px; font-weight: bold; }
+.cert small { font-size: 12px; color: #6b7280; }
+.cert.done { background: var(--soft); border-color: #9bd3b3; color: var(--dark); }
+.cert.done small { color: var(--green); }
+.proj-img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 10px; margin-bottom: 12px; background: #eef2ef; }
+.contact-card { font-size: 18px; }

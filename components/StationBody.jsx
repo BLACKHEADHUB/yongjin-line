@@ -3,7 +3,7 @@ import { youtubeId } from '@/lib/validate.js';
 // 역 하나의 내용: 이야기, 연결된 프로젝트, 사진·영상, 기술, 시설 안내, 링크.
 // 지도 옆 패널과 /stations/[id] 페이지에서 같이 쓴다.
 // 프로젝트는 station.projects에 slug를 적어 연결하고, 사진·영상은 station.media에 추가한다.
-export default function StationBody({ station: s, projects = [] }) {
+export default function StationBody({ station: s, projects = [], profile }) {
   const story = (s.story || []).filter((t) => !t.startsWith('TODO')); // 아직 안 쓴 칸은 화면에서 숨김
   const linked = (s.projects || []).map((slug) => projects.find((p) => p.slug === slug)).filter(Boolean);
   const facilities = Object.entries(s.facilities || {});
@@ -12,12 +12,23 @@ export default function StationBody({ station: s, projects = [] }) {
     <div className="station-body">
       {story.map((t, i) => <p key={i}>{t}</p>)}
 
+      {s.highlight && <p className="highlight">★ {s.highlight}</p>}
+
+      {s.badges?.length > 0 && (
+        <div className="badge-row">
+          {s.badges.map((b) => (
+            <span key={b.name} className={`cert ${b.status === '취득' ? 'done' : ''}`}>{b.name}<small>{b.status}</small></span>
+          ))}
+        </div>
+      )}
+
       {linked.length > 0 && (
         <>
           <h3>이 역의 프로젝트</h3>
           <div className="proj-list">
             {linked.map((p) => (
               <div key={p.slug} className="proj">
+                {p.image && <img className="proj-img" src={p.image} alt={`${p.name} 화면`} loading="lazy" />}
                 {p.tag && <span className="proj-tag">{p.tag}</span>}
                 <strong>{p.name}</strong>
                 <p>{p.summary}</p>
@@ -73,6 +84,17 @@ export default function StationBody({ station: s, projects = [] }) {
           <ul className="facilities">
             {facilities.map(([k, v]) => <li key={k}><span>{k}</span><span>{v}</span></li>)}
           </ul>
+        </>
+      )}
+
+      {s.contact && profile && (
+        <>
+          <h3>연락처</h3>
+          <div className="proj-links contact-card">
+            {profile.email && <a href={`mailto:${profile.email}`}>✉ {profile.email}</a>}
+            {profile.github && <a href={profile.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>}
+            {profile.resumeUrl && <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">이력서 PDF ↗</a>}
+          </div>
         </>
       )}
 

@@ -2,7 +2,7 @@
 
 중부대학교 정보보호학과 최용진의 포트폴리오입니다. 첫 화면은 교통카드 모양의 신분증이고,
 "노선도 탑승"을 누르면 카드를 찍는 개찰구를 지나 실제 지하철 노선도처럼 생긴 성장 노선도로 들어갑니다.
-역을 누르면 열차가 달려가고, 그 역의 이야기와 프로젝트, 사진, 영상이 나옵니다.
+역을 누르면 열차가 달려가고, 그 역의 이야기와 프로젝트, 사진, 영상, 자격증이 나옵니다. 전과역에서는 환승 연출이 나오고, 끝까지 가면 승차권 모양의 종착역 화면(연락처, 이력서, 방명록)이 나옵니다.
 
 - Next.js (App Router) / React
 - 내용의 원본은 `data/portfolio.js` 파일 하나입니다.
@@ -42,6 +42,10 @@ npm run dev      # http://localhost:3000
 `data/portfolio.js`의 `stations`에서 해당 역을 찾아 적습니다. 파일 맨 위 주석에도 예시가 있습니다.
 
 ```js
+period: '2021~2023',        // 기간
+highlight: '한 줄 성과',      // ★ 강조 문장
+badges: [{ name: '자격증', status: '취득' }],   // 또는 '준비 중'
+contact: true,             // 연락처 카드
 projects: ['websecprog'],   // 위 projects의 slug를 적으면 프로젝트 카드가 나옵니다
 media: [
   { type: 'image', src: '/media/photo1.jpg', caption: '설명' },        // 사진 (public/media/에 파일을 넣습니다)
@@ -58,10 +62,10 @@ app/page.js         첫 화면 (DB에서 읽고 1분간 재사용)
 lib/content.js      DB에서 내용 읽기 + 파일 내용과 자동 동기화 + 실패 시 파일로 대체
 app/api/guestbook   방명록 API (MongoDB가 있을 때만 동작)
 components/         Platform(첫 화면 카드), Gate(개찰구), Ride(노선도 화면), SubwayMap(노선도 SVG),
-                    StationBody(역 상세), PortfolioApp(화면 전환), audio(효과음)
+                    StationBody(역 상세), Guestbook(방명록), Ending(종착역), PortfolioApp(화면 전환), audio(효과음)
 app/stations        역 목록과 역별 상세 페이지 (/stations, /stations/y01)
 lib/layout.js       노선도 좌표 (역 좌표는 선 위에 있어야 합니다)
-_archive/           쓰지 않는 예전 화면 (방명록 화면, 환승 연출이 있던 노선도 등)
+_archive/           쓰지 않는 예전 화면 (옛 노선도, 목록 보기)
 lib/mongodb.js      MongoDB 연결 (서버리스용 연결 재사용)
 ```
 

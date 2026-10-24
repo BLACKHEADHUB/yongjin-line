@@ -10,7 +10,7 @@
 | NoSQL 인젝션 | 입력은 문자열만 허용하고 객체가 오면 거부. 쿼리에 사용자 입력 객체를 넣지 않음 | `lib/validate.js` |
 | XSS | React 자동 이스케이프, `dangerouslySetInnerHTML` 미사용, CSP | `next.config.mjs` |
 | 클릭재킹 | `frame-ancestors 'none'`, `X-Frame-Options: DENY` | `next.config.mjs` |
-| 외부 iframe | 유튜브는 `youtube-nocookie.com`만 허용하고 `sandbox` 적용, 영상 아이디 11자만 추출 | `_archive/StationBody.jsx` (현재 미사용) |
+| 외부 iframe | 유튜브는 `youtube-nocookie.com`만 허용하고 `sandbox` 적용, 영상 아이디 11자만 추출 | `components/StationBody.jsx` |
 | CSRF | 방명록 쓰기는 Origin이 Host와 같을 때만 허용 | `lib/request.js`, `lib/api.js` |
 | 방명록 스팸 | 숨김 입력칸(honeypot), 같은 IP 30초 간격 제한, 총 2000개 상한, 글자 수 제한, 본문 크기 제한 | `app/api/guestbook` |
 | 개인정보 | IP는 원문이 아니라 해시로만 저장하고 응답에 포함하지 않음 | `lib/request.js` |

@@ -7,7 +7,7 @@ export const revalidate = 60;
 
 export default async function StationDetail({ params }) {
   const { id } = await params;
-  const { stations, projects } = await loadContent();
+  const { stations, projects, profile } = await loadContent();
   const s = stations.find((x) => x.id === id);
   if (!s) notFound(); // 없는 역이면 404
   return (
@@ -17,10 +17,10 @@ export default async function StationDetail({ params }) {
         <span className="st-no">{s.no}</span>
         <div>
           <h1>{s.name}{s.status === 'construction' && ' (공사 중)'}</h1>
-          <p className="muted">{s.subtitle}</p>
+          <p className="muted">{s.subtitle}{s.period ? ` · ${s.period}` : ''}</p>
         </div>
       </div>
-      <section className="panel"><StationBody station={s} projects={projects} /></section>
+      <section className="panel"><StationBody station={s} projects={projects} profile={profile} /></section>
     </main>
   );
 }

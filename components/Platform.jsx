@@ -65,6 +65,7 @@ export default function Platform({ profile: p, projects, stations, onBoard }) {
         <div className="proj-list">
           {projects.map((pr) => (
             <div key={pr.slug} className="proj">
+              {pr.image && <img className="proj-img" src={pr.image} alt={`${pr.name} 화면`} loading="lazy" />}
               {pr.tag && <span className="proj-tag">{pr.tag}</span>}
               <strong>{pr.name}</strong>
               <p>{pr.summary}</p>
@@ -82,6 +83,7 @@ export default function Platform({ profile: p, projects, stations, onBoard }) {
       <section className="panel contact">
         {p.email && <a href={`mailto:${p.email}`}>✉ {p.email}</a>}
         {p.github && <a href={p.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>}
+        {p.resumeUrl && <a href={p.resumeUrl} target="_blank" rel="noopener noreferrer">이력서 PDF ↗</a>}
         <a href="/stations">역 목록</a>
       </section>
     </main>

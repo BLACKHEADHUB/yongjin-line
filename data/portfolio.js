@@ -6,6 +6,10 @@
  * 지도 위 좌표(x, y)는 lib/layout.js의 노선 위에 놓여 있으니, 역을 옮길 때가 아니면 건드리지 마세요.
  *
  * 역에 내용을 추가하는 법 (stations 안의 해당 역에 적습니다):
+ *   period: '2021~2023'                 ← 기간 (제목 옆에 표시)
+ *   highlight: '한 줄 성과'               ← ★ 표시로 강조되는 한 줄
+ *   badges: [{ name: '자격증 이름', status: '취득' }]   // status: '취득' 또는 '준비 중'
+ *   contact: true                       ← 이 역에 연락처 카드를 보여줍니다
  *   projects: ['websecprog']            ← 위 projects의 slug를 적으면 프로젝트 카드가 나옵니다
  *   media: [
  *     { type: 'image', src: '/media/photo1.jpg', caption: '설명' },   // 사진: public/media/ 폴더에 파일을 넣고 경로를 적습니다
@@ -93,6 +97,9 @@ export const stations = [
     ],
     tags: [],
     facilities: { 목적지: '미정', 소요시간: '아직 모름' },
+    period: '', // TODO: 기간 (예: 2021~2023)
+    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    badges: [],
     media: [],
     links: [],
     announce: '이번 역은 백마역입니다. 목적지를 정하신 후 탑승해 주세요.',
@@ -115,6 +122,9 @@ export const stations = [
     ],
     tags: ['ChatGPT'],
     facilities: { 호기심: '급상승' },
+    period: '', // TODO: 기간 (예: 2021~2023)
+    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    badges: [],
     media: [],
     links: [],
     announce: '이번 역은 IT역입니다. 질문 한 줄에 흥미가 생기신 분은 여기서 내리십시오.',
@@ -137,6 +147,9 @@ export const stations = [
     ],
     tags: [],
     facilities: { 편집점: '여기' },
+    period: '', // TODO: 기간 (예: 2021~2023)
+    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    badges: [],
     media: [],
     links: [],
     announce: '이번 역은 영상역입니다. 컷이 바뀌는 곳에서 인생도 바뀝니다.',
@@ -159,6 +172,9 @@ export const stations = [
     ],
     tags: [],
     facilities: { 운행: '정상 종료' },
+    period: '', // TODO: 기간 (예: 2021~2023)
+    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    badges: [],
     media: [],
     links: [],
     announce: '이번 역은 전역입니다. 이 역에서 내리시는 분은 새 노선으로 환승하십시오.',
@@ -181,6 +197,9 @@ export const stations = [
     ],
     tags: [],
     facilities: { 환승: '사진영상 → 정보보호', 역환승: '불가' },
+    period: '', // TODO: 기간 (예: 2021~2023)
+    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    badges: [],
     media: [],
     links: [],
     announce: '이번 역은 전과역입니다. 갈아타실 분은 지금 내리십시오. 내리실 문은 없습니다.',
@@ -203,6 +222,9 @@ export const stations = [
     ],
     tags: ['정보보호'],
     facilities: { 방화벽: '가동 중', 무단하차: '차단' },
+    period: '', // TODO: 기간 (예: 2021~2023)
+    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    badges: [],
     media: [],
     links: [],
     announce: '이번 역은 정보역입니다. 무단 하차는 차단됩니다.',
@@ -226,6 +248,9 @@ export const stations = [
     tags: ['Next.js', 'MongoDB', 'Vercel'],
     projects: ['websecprog', 'yongjin-line'], // 이 역에 보여줄 프로젝트 (위 projects의 slug)
     facilities: { 현재위치: '당신은 지금 여기', 빌드상태: '진행 중' },
+    period: '', // TODO: 기간 (예: 2021~2023)
+    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    badges: [],
     media: [],
     links: [{ label: 'GitHub', url: 'https://github.com/BLACKHEADHUB/yongjin-line' }],
     announce: '이번 역은 빌드역입니다. 현재 열차는 제작 중입니다.',
@@ -245,6 +270,9 @@ export const stations = [
     story: ['아직 개통되지 않은 역입니다. 만든 것을 세상에 내놓는 날을 준비하고 있습니다.'],
     tags: [],
     facilities: { 개통예정: '2027년' },
+    period: '', // TODO: 기간 (예: 2021~2023)
+    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    badges: [],
     media: [],
     links: [],
     announce: '',
@@ -264,6 +292,10 @@ export const stations = [
     story: ['아직 개통되지 않은 역입니다. 채용을 통해 개통을 앞당겨 주세요.'],
     tags: [],
     facilities: { 후원: '채용 담당자님' },
+    contact: true, // 연락처 카드를 보여줍니다
+    period: '', // TODO: 기간 (예: 2021~2023)
+    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    badges: [],
     media: [],
     links: [],
     announce: '',
