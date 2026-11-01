@@ -129,7 +129,7 @@ export default function Gate({ profile: p, sound, setSound, onEnter }) {
           <div className="tc-photo">{p.photo ? <img src={p.photo} alt="" draggable="false" /> : '(사진)'}</div>
           <div className="tc-info">
             <strong>{p.name}</strong>
-            <span>{[p.school, p.dept].filter(Boolean).join(' ')}</span>
+            <span>{[p.school, p.dept, p.year].filter(Boolean).join(' ')}</span>
             <span className="tc-role">{p.role}</span>
           </div>
         </div>

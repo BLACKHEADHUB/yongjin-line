@@ -2,7 +2,7 @@
  * 사이트 내용은 전부 이 파일에 있습니다. 고치고 저장하면 화면에 바로 반영되고,
  * 커밋해서 GitHub에 올리면 Vercel이 자동으로 다시 배포합니다.
  *
- * TODO 표시가 있는 곳은 임시 초안입니다.
+ * TODO 표시가 있는 곳은 아직 비어 있는 칸입니다 (비어 있으면 화면에 나오지 않습니다).
  * 지도 위 좌표(x, y)는 lib/layout.js의 노선 위에 놓여 있으니, 역을 옮길 때가 아니면 건드리지 마세요.
  *
  * 역에 내용을 추가하는 법 (stations 안의 해당 역에 적습니다):
@@ -267,7 +267,7 @@ export const stations = [
     badges: [],
     photo: '/media/y07.jpg', // 역 대표 사진 (public/media/y07.jpg)
     media: [],
-    links: [{ label: 'GitHub', url: 'https://github.com/BLACKHEADHUB/yongjin-line' }],
+    links: [],
     announce: '이번 역은 빌드역입니다. 현재 열차는 제작 중입니다.',
   },
   {
@@ -301,13 +301,13 @@ export const stations = [
     no: 'Y09',
     name: '취업역',
     en: 'First Job',
-    subtitle: '채용을 통해 개통을 앞당겨 주세요',
+    subtitle: '첫 출근을 준비하는 역',
     line: 'after',
     x: 1330,
     y: 340,
     label: 'below',
     status: 'construction',
-    story: ['아직 개통되지 않은 역입니다. 채용을 통해 개통을 앞당겨 주세요.'],
+    story: ['아직 개통되지 않은 역입니다.', '웹 개발과 클라우드 보안 직무로 첫 출근을 준비하고 있습니다. 채용을 통해 개통을 앞당겨 주세요.'],
     tags: [],
     facilities: { 후원: '채용 담당자님' },
     contact: true, // 연락처 카드를 보여줍니다
