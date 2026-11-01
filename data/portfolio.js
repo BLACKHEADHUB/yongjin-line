@@ -9,7 +9,8 @@
  *   period: '2021~2023'                 ← 기간 (제목 옆에 표시)
  *   highlight: '한 줄 성과'               ← ★ 표시로 강조되는 한 줄
  *   badges: [{ name: '자격증 이름', status: '취득' }]   // status: '취득' 또는 '준비 중'
- *   photo: '/media/y01.jpg'               ← 역 대표 사진 한 장. 비워 두면 '사진 준비 중' 빈 자리로 보입니다
+ *   photo: '/media/y01.jpg'               ← 역 대표 사진 한 장(세로 3:4로 보임). 비워 두면 '사진 준비 중' 빈 자리
+ *   photoPos: 'center 30%'              ← 사진이 잘릴 때 보여 줄 위치 (선택)
  *   contact: true                       ← 이 역에 연락처 카드를 보여줍니다
  *   projects: ['websecprog']            ← 위 projects의 slug를 적으면 프로젝트 카드가 나옵니다
  *   media: [
@@ -101,7 +102,8 @@ export const stations = [
     period: '',
     highlight: '',
     badges: [],
-    photo: '', // 역 대표 사진: public/media/y01.jpg 에 넣고 '/media/y01.jpg'
+    photo: '/media/y01.jpg', // 역 대표 사진 (public/media/y01.jpg)
+    photoPos: 'center 40%', // 사진이 잘릴 때 보여 줄 위치
     media: [],
     links: [],
     announce: '이번 역은 백마역입니다. 목적지를 정하신 후 탑승해 주세요.',
@@ -110,8 +112,8 @@ export const stations = [
     id: 'y02',
     order: 2,
     no: 'Y02',
-    name: 'IT역',
-    en: 'IT',
+    name: 'AI역',
+    en: 'AI',
     subtitle: 'AI와 IT에 처음 흥미가 생긴 역',
     line: 'before',
     x: 240,
@@ -127,10 +129,10 @@ export const stations = [
     period: '2022.11',
     highlight: '',
     badges: [],
-    photo: '', // 역 대표 사진: public/media/y02.jpg 에 넣고 '/media/y02.jpg'
+    photo: '/media/y02.jpg', // 역 대표 사진 (public/media/y02.jpg)
     media: [],
     links: [],
-    announce: '이번 역은 IT역입니다. 질문 한 줄에 흥미가 생기신 분은 여기서 내리십시오.',
+    announce: '이번 역은 AI역입니다. 질문 한 줄에 흥미가 생기신 분은 여기서 내리십시오.',
   },
   {
     id: 'y03',
@@ -153,8 +155,8 @@ export const stations = [
     period: '',
     highlight: '',
     badges: [],
-    photo: '', // 역 대표 사진: public/media/y03.jpg 에 넣고 '/media/y03.jpg'
-    media: [{ type: 'youtube', src: 'https://youtu.be/9EmrXzjb1vM', caption: '대표 작업 영상' }],
+    photo: '/media/y03.jpg', // 역 대표 사진 (public/media/y03.jpg)
+    media: [],
     links: [],
     announce: '이번 역은 영상역입니다. 컷이 바뀌는 곳에서 인생도 바뀝니다.',
   },
@@ -180,7 +182,7 @@ export const stations = [
     period: '2025.02 ~ 2026',
     highlight: '',
     badges: [],
-    photo: '', // 역 대표 사진: public/media/y04.jpg 에 넣고 '/media/y04.jpg'
+    photo: '/media/y04.jpg', // 역 대표 사진 (public/media/y04.jpg)
     media: [],
     links: [],
     announce: '이번 역은 전역입니다. 이 역에서 내리시는 분은 새 노선으로 환승하십시오.',
@@ -208,7 +210,8 @@ export const stations = [
     period: '',
     highlight: '결심부터 실행까지 단 1주일',
     badges: [],
-    photo: '', // 역 대표 사진: public/media/y05.jpg 에 넣고 '/media/y05.jpg'
+    photo: '/media/y05.jpg', // 역 대표 사진 (public/media/y05.jpg)
+    photoPos: 'center 35%', // 사진이 잘릴 때 보여 줄 위치
     media: [],
     links: [],
     announce: '이번 역은 전과역입니다. 갈아타실 분은 지금 내리십시오. 내리실 문은 없습니다.',
@@ -234,7 +237,7 @@ export const stations = [
     period: '',
     highlight: '',
     badges: [],
-    photo: '', // 역 대표 사진: public/media/y06.jpg 에 넣고 '/media/y06.jpg'
+    photo: '/media/y06.jpg', // 역 대표 사진 (public/media/y06.jpg)
     media: [],
     links: [],
     announce: '이번 역은 정보역입니다. 무단 하차는 차단됩니다.',
@@ -262,7 +265,7 @@ export const stations = [
     period: '',
     highlight: '',
     badges: [],
-    photo: '', // 역 대표 사진: public/media/y07.jpg 에 넣고 '/media/y07.jpg'
+    photo: '/media/y07.jpg', // 역 대표 사진 (public/media/y07.jpg)
     media: [],
     links: [{ label: 'GitHub', url: 'https://github.com/BLACKHEADHUB/yongjin-line' }],
     announce: '이번 역은 빌드역입니다. 현재 열차는 제작 중입니다.',

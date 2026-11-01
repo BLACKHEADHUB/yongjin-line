@@ -10,15 +10,24 @@ export default function StationBody({ station: s, projects = [], profile }) {
 
   return (
     <div className="station-body">
-      {s.status !== 'construction' && (
-        <figure className={`station-photo ${s.photo ? '' : 'empty'}`}>
-          {s.photo ? <img src={s.photo} alt={`${s.name} 사진`} loading="lazy" /> : <span>사진 준비 중</span>}
-        </figure>
+      {s.status !== 'construction' ? (
+        <div className="station-intro">
+          <div className="station-text">
+            {story.map((t, i) => <p key={i}>{t}</p>)}
+            {s.highlight && <p className="highlight">★ {s.highlight}</p>}
+          </div>
+          <figure className={`station-photo ${s.photo ? '' : 'empty'}`}>
+            {s.photo
+              ? <img src={s.photo} alt={`${s.name} 사진`} loading="lazy" style={s.photoPos ? { objectPosition: s.photoPos } : undefined} />
+              : <span>사진 준비 중</span>}
+          </figure>
+        </div>
+      ) : (
+        <>
+          {story.map((t, i) => <p key={i}>{t}</p>)}
+          {s.highlight && <p className="highlight">★ {s.highlight}</p>}
+        </>
       )}
-
-      {story.map((t, i) => <p key={i}>{t}</p>)}
-
-      {s.highlight && <p className="highlight">★ {s.highlight}</p>}
 
       {s.badges?.length > 0 && (
         <div className="badge-row">
