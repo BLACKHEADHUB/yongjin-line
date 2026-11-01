@@ -9,6 +9,7 @@
  *   period: '2021~2023'                 ← 기간 (제목 옆에 표시)
  *   highlight: '한 줄 성과'               ← ★ 표시로 강조되는 한 줄
  *   badges: [{ name: '자격증 이름', status: '취득' }]   // status: '취득' 또는 '준비 중'
+ *   photo: '/media/y01.jpg'               ← 역 대표 사진 한 장. 비워 두면 '사진 준비 중' 빈 자리로 보입니다
  *   contact: true                       ← 이 역에 연락처 카드를 보여줍니다
  *   projects: ['websecprog']            ← 위 projects의 slug를 적으면 프로젝트 카드가 나옵니다
  *   media: [
@@ -20,15 +21,15 @@
 
 export const profile = {
   name: '최용진',
-  nameEn: '', // TODO: 영문 표기
+  nameEn: 'CHOI YONGJIN',
   school: '중부대학교',
-  dept: '정보보호학과', // TODO: 학년을 알려 주세요
-  year: '',
+  dept: '정보보호학과',
+  year: '2학년',
   tagline: '보안을 생각하며 웹을 만들고 배포합니다', // 이름 아래에 크게 보이는 한 줄
-  role: '웹 개발 · 클라우드 보안', // TODO: 직무 방향. 상단 바와 첫 화면에 표시됩니다
+  role: '웹 개발 · 클라우드 보안', // 직무 방향. 상단 바와 첫 화면에 표시됩니다
   about:
-    '웹 개발과 클라우드 보안을 공부하고 있습니다. 사진영상을 전공하다 전과한 경험으로 영상 제작과 사용자 경험에도 관심이 있습니다. TODO: 본인의 말로 2~3문장으로 다듬어 주세요.',
-  // 분야별 기술. level은 비우거나 '익숙함', '사용해 봄' 중 하나. TODO: 실제로 쓴 것만 남기고 고쳐 주세요.
+    '일산에 사는 05년생, 만 21세 최용진입니다. 정보보호를 전공하고 있습니다.',
+  // 분야별 기술. level은 비우거나 '익숙함', '사용해 봄' 중 하나.
   skills: [
     { group: '웹 개발', items: [{ name: 'JavaScript', level: '' }, { name: 'React', level: '' }, { name: 'Next.js', level: '' }, { name: 'MongoDB', level: '' }, { name: 'Git / GitHub', level: '' }] },
     { group: '클라우드·배포', items: [{ name: 'Vercel 배포', level: '' }, { name: 'MongoDB Atlas', level: '' }, { name: '환경변수·최소 권한 DB 사용자', level: '' }] },
@@ -36,10 +37,10 @@ export const profile = {
     { group: 'AI 활용', items: [{ name: '생성형 AI를 이용한 개발·학습', level: '' }] },
     { group: '영상·미디어', items: [{ name: '영상 편집', level: '' }, { name: '사진 촬영', level: '' }] },
   ],
-  interests: ['정보보호', '웹 개발', 'AI 활용'], // TODO: 관심 분야
+  interests: ['정보보호', '웹 개발', 'AI 활용'], // 관심 분야
   talents: ['웹 개발', '클라우드 배포', '영상 편집', '작사·랩'], // 특기
   photo: '/media/me.jpg', // 증명사진 (public/media/me.jpg)
-  status: '', // TODO: 예: 인턴 지원 중
+  status: '대학생', // 현재 상태
   email: 'chyjin0202@naver.com', // 비워 두면 화면에 표시되지 않습니다
   github: 'https://github.com/BLACKHEADHUB',
   resumeUrl: '', // TODO: 이력서. public/media/resume.pdf 에 넣고 '/media/resume.pdf'
@@ -51,9 +52,9 @@ export const projects = [
     slug: 'websecprog',
     order: 1,
     featured: true,
-    tag: '강의 실습',
-    name: '웹서버보안프로그래밍 실습',
-    summary: '수업에서 실습 중인 Next.js 프로젝트. 회원가입·로그인(해시 저장), 공지와 상품 게시를 MongoDB에 저장합니다.',
+    tag: '웹서버보안프로그래밍 실습',
+    name: 'Comit',
+    summary: '수업에서 기획부터 개발까지 맡은 Next.js 프로젝트. 회원가입·로그인(해시 저장), 공지와 상품 게시를 MongoDB에 저장합니다.',
     stack: ['Next.js', 'MongoDB', 'NextAuth', 'bcrypt'],
     links: [
       { label: '저장소', url: 'https://github.com/BLACKHEADHUB/websecprog' },
@@ -92,14 +93,15 @@ export const stations = [
     label: 'below',
     status: 'open',
     story: [
-      '진로를 정하지 못하고 방황하던 시절의 시발역입니다.',
-      'TODO: 이 시기에 있었던 일과 지금 돌아보며 느끼는 점을 적어 주세요.',
+      '백마고등학교에 입학하며 출발한 시발역입니다.',
+      '꿈을 찾기 위해 방황하던 시절이었습니다.',
     ],
     tags: [],
     facilities: { 목적지: '미정', 소요시간: '아직 모름' },
-    period: '', // TODO: 기간 (예: 2021~2023)
-    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    period: '',
+    highlight: '',
     badges: [],
+    photo: '', // 역 대표 사진: public/media/y01.jpg 에 넣고 '/media/y01.jpg'
     media: [],
     links: [],
     announce: '이번 역은 백마역입니다. 목적지를 정하신 후 탑승해 주세요.',
@@ -117,14 +119,15 @@ export const stations = [
     label: 'below',
     status: 'open',
     story: [
-      'ChatGPT의 등장으로 AI와 IT 기술에 더 흥미가 생기기 시작했습니다.',
-      'TODO: 어떤 점이 신기했고, 직접 무엇을 해 봤는지 적어 주세요.',
+      '2022년 11월 30일, ChatGPT가 출시되었습니다.',
+      '이 친구와 대화를 나누며 그 문장력에 감탄했고, 그때부터 AI 기술에 큰 흥미를 갖게 되었습니다.',
     ],
     tags: ['ChatGPT'],
     facilities: { 호기심: '급상승' },
-    period: '', // TODO: 기간 (예: 2021~2023)
-    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    period: '2022.11',
+    highlight: '',
     badges: [],
+    photo: '', // 역 대표 사진: public/media/y02.jpg 에 넣고 '/media/y02.jpg'
     media: [],
     links: [],
     announce: '이번 역은 IT역입니다. 질문 한 줄에 흥미가 생기신 분은 여기서 내리십시오.',
@@ -143,14 +146,15 @@ export const stations = [
     status: 'open',
     story: [
       '사진영상을 전공하며 이미지를 만들고 이야기를 편집하는 법을 배웠습니다.',
-      'TODO: 대표 작업과 그 작업에서 배운 점을 적어 주세요.',
+      '짧은 단편영화와 자기소개 영상을 직접 만들었습니다.',
     ],
     tags: [],
     facilities: { 편집점: '여기' },
-    period: '', // TODO: 기간 (예: 2021~2023)
-    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    period: '',
+    highlight: '',
     badges: [],
-    media: [],
+    photo: '', // 역 대표 사진: public/media/y03.jpg 에 넣고 '/media/y03.jpg'
+    media: [{ type: 'youtube', src: 'https://youtu.be/9EmrXzjb1vM', caption: '대표 작업 영상' }],
     links: [],
     announce: '이번 역은 영상역입니다. 컷이 바뀌는 곳에서 인생도 바뀝니다.',
   },
@@ -167,14 +171,16 @@ export const stations = [
     label: 'below',
     status: 'open',
     story: [
-      '군 복무를 마치고 앞으로의 방향을 다시 생각한 역입니다.',
-      'TODO: 복무 중에 배운 점이나 전과를 결심한 계기를 적어 주세요.',
+      '2025년 2월 17일에 입대해 2026년에 군 복무를 마쳤습니다.',
+      '진정한 남자로 재탄생…하진 않았지만, 일을 빠릿빠릿하게 해내는 법은 확실히 배웠습니다.',
+      '그리고 이 역에서 전과를 결심했습니다.',
     ],
     tags: [],
     facilities: { 운행: '정상 종료' },
-    period: '', // TODO: 기간 (예: 2021~2023)
-    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    period: '2025.02 ~ 2026',
+    highlight: '',
     badges: [],
+    photo: '', // 역 대표 사진: public/media/y04.jpg 에 넣고 '/media/y04.jpg'
     media: [],
     links: [],
     announce: '이번 역은 전역입니다. 이 역에서 내리시는 분은 새 노선으로 환승하십시오.',
@@ -192,14 +198,17 @@ export const stations = [
     label: 'transfer',
     status: 'open',
     story: [
-      '사진영상과에서 정보보호학과로 전과한 환승역입니다.',
-      'TODO: 전과를 결심한 이유와 과정(고민, 설득, 지원서)을 진지하게 2~3문장으로 적어 주세요.',
+      'AI가 판치는 세상, 미래가 두려웠습니다. 저는 그 두려움을 정면 돌파하기로 마음먹었습니다.',
+      'IT 업계 취업을 목표로 세웠고, 전과까지 결심하게 되었습니다.',
+      '결심부터 실행까지 걸린 시간은 단 1주일. 기존 학과 교수님께 연락드린 뒤 바로 정보보호학과에 연락했습니다.',
+      '지금은 배우는 내용이 모두 새롭고 재밌습니다. 후회 없는 선택이었습니다.',
     ],
     tags: [],
     facilities: { 환승: '사진영상 → 정보보호', 역환승: '불가' },
-    period: '', // TODO: 기간 (예: 2021~2023)
-    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    period: '',
+    highlight: '결심부터 실행까지 단 1주일',
     badges: [],
+    photo: '', // 역 대표 사진: public/media/y05.jpg 에 넣고 '/media/y05.jpg'
     media: [],
     links: [],
     announce: '이번 역은 전과역입니다. 갈아타실 분은 지금 내리십시오. 내리실 문은 없습니다.',
@@ -218,13 +227,14 @@ export const stations = [
     status: 'open',
     story: [
       '정보보호학과에서 시스템과 데이터를 지키는 방법을 배우고 있습니다.',
-      'TODO: 가장 재미있었던 수업이나 실습을 적어 주세요.',
+      '전과 후 첫 학기에는 보안운영체제, 웹서버보안프로그래밍, 인공지능기초, 보안프로그래밍, 시스템프로그래밍, 패킷분석및공격대응을 수강했습니다.',
     ],
     tags: ['정보보호'],
     facilities: { 방화벽: '가동 중', 무단하차: '차단' },
-    period: '', // TODO: 기간 (예: 2021~2023)
-    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    period: '',
+    highlight: '',
     badges: [],
+    photo: '', // 역 대표 사진: public/media/y06.jpg 에 넣고 '/media/y06.jpg'
     media: [],
     links: [],
     announce: '이번 역은 정보역입니다. 무단 하차는 차단됩니다.',
@@ -242,15 +252,17 @@ export const stations = [
     label: 'below',
     status: 'open',
     story: [
-      '지금까지 만들어 본 것들이 있는 역입니다. 이 사이트도 여기에 있습니다.',
-      'Next.js와 MongoDB로 직접 만들었고, 입력 검증과 보안 헤더 같은 보안 처리까지 적용했습니다.',
+      '지금까지 만들어 본 것들이 있는 역입니다.',
+      '웹서버보안프로그래밍 수업에서는 Comit 프로젝트를 기획하고 개발했습니다.',
+      '이 포트폴리오 사이트도 직접 개발했습니다. Next.js와 MongoDB로 만들고, 입력 검증과 보안 헤더 같은 보안 처리까지 적용했습니다.',
     ],
     tags: ['Next.js', 'MongoDB', 'Vercel'],
     projects: ['websecprog', 'yongjin-line'], // 이 역에 보여줄 프로젝트 (위 projects의 slug)
     facilities: { 현재위치: '당신은 지금 여기', 빌드상태: '진행 중' },
-    period: '', // TODO: 기간 (예: 2021~2023)
-    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    period: '',
+    highlight: '',
     badges: [],
+    photo: '', // 역 대표 사진: public/media/y07.jpg 에 넣고 '/media/y07.jpg'
     media: [],
     links: [{ label: 'GitHub', url: 'https://github.com/BLACKHEADHUB/yongjin-line' }],
     announce: '이번 역은 빌드역입니다. 현재 열차는 제작 중입니다.',
@@ -267,12 +279,15 @@ export const stations = [
     y: 340,
     label: 'above',
     status: 'construction',
-    story: ['아직 개통되지 않은 역입니다. 만든 것을 세상에 내놓는 날을 준비하고 있습니다.'],
+    story: [
+      '아직 개통되지 않은 역입니다. 앞으로 차근차근 쌓아 나가겠습니다.',
+    ],
     tags: [],
     facilities: { 개통예정: '2027년' },
-    period: '', // TODO: 기간 (예: 2021~2023)
-    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    period: '',
+    highlight: '',
     badges: [],
+    photo: '', // 역 대표 사진: public/media/y08.jpg 에 넣고 '/media/y08.jpg'
     media: [],
     links: [],
     announce: '',
@@ -293,9 +308,10 @@ export const stations = [
     tags: [],
     facilities: { 후원: '채용 담당자님' },
     contact: true, // 연락처 카드를 보여줍니다
-    period: '', // TODO: 기간 (예: 2021~2023)
-    highlight: '', // TODO: 이 역에서 가장 강조하고 싶은 한 줄
+    period: '',
+    highlight: '',
     badges: [],
+    photo: '', // 역 대표 사진: public/media/y09.jpg 에 넣고 '/media/y09.jpg'
     media: [],
     links: [],
     announce: '',

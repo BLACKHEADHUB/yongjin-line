@@ -34,6 +34,7 @@ button.sub:hover { background: var(--soft); }
 .idcard h1 { font-size: 50px; margin: 0 0 4px; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,.25); }
 .idcard-info div { font-size: 22px; opacity: .95; }
 .idcard-info .role { margin-top: 4px; font-weight: bold; }
+.idcard-info .name-en { font-size: 15px; letter-spacing: .12em; opacity: .75; margin: -2px 0 6px; }
 .idcard-info .talents { font-size: 17px; opacity: .85; }
 .idcard-bottom { display: flex; justify-content: space-between; font-size: 16px; opacity: .9; letter-spacing: .5px; }
 
@@ -178,6 +179,9 @@ button.sub:hover { background: var(--soft); }
 .station-body p { margin: 8px 0; }
 .media-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
 .media { margin: 0; }
+.station-photo { margin: 0 0 14px; border-radius: 10px; overflow: hidden; }
+.station-photo img { width: 100%; max-height: 380px; object-fit: cover; display: block; }
+.station-photo.empty { height: 120px; display: grid; place-items: center; border: 2px dashed #cfd6dc; color: var(--muted); font-size: 15px; background: #f6f7f8; }
 .media img, .media video { width: 100%; border-radius: 10px; display: block; }
 .media figcaption { font-size: 15px; color: var(--muted); margin-top: 4px; }
 .yt { position: relative; padding-top: 56.25%; }

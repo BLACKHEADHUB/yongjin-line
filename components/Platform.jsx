@@ -31,7 +31,8 @@ export default function Platform({ profile: p, projects, stations, onBoard }) {
             <div className="photo">{p.photo ? <img src={p.photo} alt="증명사진" /> : '(사진)'}</div>
             <div className="idcard-info">
               <h1>{p.name}</h1>
-              <div>{[p.school, p.dept].filter(Boolean).join(' ')}</div>
+              {p.nameEn && <div className="name-en">{p.nameEn}</div>}
+              <div>{[p.school, p.dept, p.year].filter(Boolean).join(' ')}</div>
               <div className="role">{p.role}</div>
               {p.talents?.length > 0 && <div className="talents">특기 · {p.talents.join(' · ')}</div>}
             </div>

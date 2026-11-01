@@ -10,6 +10,12 @@ export default function StationBody({ station: s, projects = [], profile }) {
 
   return (
     <div className="station-body">
+      {s.status !== 'construction' && (
+        <figure className={`station-photo ${s.photo ? '' : 'empty'}`}>
+          {s.photo ? <img src={s.photo} alt={`${s.name} 사진`} loading="lazy" /> : <span>사진 준비 중</span>}
+        </figure>
+      )}
+
       {story.map((t, i) => <p key={i}>{t}</p>)}
 
       {s.highlight && <p className="highlight">★ {s.highlight}</p>}
