@@ -159,7 +159,7 @@ export const stations = [
     media: [],
     links: [
       { label: '유튜브 영상', url: 'https://youtu.be/9EmrXzjb1vM' },
-      { label: '네이버 블로그', url: 'https://blog.naver.com/chyjin0202/223761621858' },
+      { label: '단편영화', url: 'https://blog.naver.com/chyjin0202/223761621858' },
     ],
     announce: '이번 역은 영상역입니다. 컷이 바뀌는 곳에서 인생도 바뀝니다.',
   },
