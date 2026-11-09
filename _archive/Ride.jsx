@@ -14,7 +14,7 @@ export default function Ride({ data, guestbook, sound, setSound, autoplay, setAu
 
   // 좁은 화면에서는 목록이 기본이다 (노선도는 가로로 넓다)
   useEffect(() => {
-    if (window.matchMedia('(max-width: 720px)').matches && autoplay !== 'run') setView('list');
+    if (window.matchMedia('(max-width: 1200px)').matches && autoplay !== 'run') setView('list');
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
