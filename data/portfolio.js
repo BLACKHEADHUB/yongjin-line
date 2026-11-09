@@ -84,7 +84,7 @@ export const projects = [
     tag: '개인 개발',
     name: '제철여행',
     summary: '언제·며칠·어떤 날씨를 고르면, 그때 가장 알맞고 알찬 여행지를 골라 드려요.',
-    stack: ['Next.js', 'MongoDB', 'NextAuth', 'bcrypt'],
+    stack: ['Next.js', 'React'],
     links: [
       { label: '저장소', url: 'https://github.com/BLACKHEADHUB/travel-value' },
       { label: '배포', url: 'https://travel-value-eight.vercel.app' },
