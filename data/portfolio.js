@@ -77,6 +77,20 @@ export const projects = [
     ],
     image: '',
   },
+  {
+    slug: 'travel-value',
+    order: 3,
+    featured: true,
+    tag: '개인 개발',
+    name: '제철여행',
+    summary: '언제·며칠·어떤 날씨를 고르면, 그때 가장 알맞고 알찬 여행지를 골라 드려요.',
+    stack: ['Next.js', 'MongoDB', 'NextAuth', 'bcrypt'],
+    links: [
+      { label: '저장소', url: 'https://github.com/BLACKHEADHUB/travel-value' },
+      { label: '배포', url: 'https://travel-value-eight.vercel.app' },
+    ],
+    image: '',
+  },
 ];
 
 // line: 'before'(전과 전, 회색) | 'transfer' | 'after'(전과 후, 초록)
