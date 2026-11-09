@@ -277,7 +277,7 @@ export const stations = [
       '이 포트폴리오 사이트도 직접 개발했습니다. Next.js와 MongoDB로 만들고, 입력 검증과 보안 헤더 같은 보안 처리까지 적용했습니다.',
     ],
     tags: ['Next.js', 'MongoDB', 'Vercel'],
-    projects: ['websecprog', 'yongjin-line'], // 이 역에 보여줄 프로젝트 (위 projects의 slug)
+    projects: ['websecprog', 'yongjin-line', 'travel-value'], // 이 역에 보여줄 프로젝트 (위 projects의 slug)
     facilities: { 현재위치: '당신은 지금 여기', 빌드상태: '진행 중' },
     period: '',
     highlight: '',
