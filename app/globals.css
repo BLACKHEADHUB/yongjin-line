@@ -269,3 +269,29 @@ button:disabled { opacity: .4; cursor: default; }
 .cert.done small { color: var(--green); }
 .proj-img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 10px; margin-bottom: 12px; background: #eef2ef; }
 .contact-card { font-size: 18px; }
+.platform {
+  width: min(calc(100% - 32px), 1180px);
+  margin-inline: auto;
+}
+
+.proj-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .proj-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .platform {
+    width: calc(100% - 24px);
+  }
+
+  .proj-list {
+    grid-template-columns: 1fr;
+  }
+}
